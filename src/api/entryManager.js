@@ -27,3 +27,15 @@ export const getUserEntries = async (token) => {
     });
     return await response.json();
 }
+
+export const createEntry = async (entry, token) => {
+    const response = await fetch("http://localhost:8000/entries", {
+        method: "POST",
+        headers: {
+            "Authorization": `Token ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entry)
+    });
+    return await response.json();
+}
