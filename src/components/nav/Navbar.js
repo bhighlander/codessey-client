@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export const NavBar = ({ token, setToken }) => {
     const navigate = useNavigate()
-    const navbar = useRef()
 
     return (
         <header className="navbar">
@@ -11,6 +10,7 @@ export const NavBar = ({ token, setToken }) => {
             <nav>
                 <Link className="navbar__link" to="/">Home</Link>
                 <Link className="navbar__link" to="/entries">Entries</Link>
+                <Link className="navbar__link" to="/categories">Categories</Link>
                 <Link className="navbar__link" to="/entries/create">New Entry</Link>
                 <div className="buttons">
                             {token ? (
