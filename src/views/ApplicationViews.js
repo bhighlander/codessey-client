@@ -5,17 +5,29 @@ import { EntriesList } from "../components/entries/ViewAllEntries"
 import { CreateEntry } from "../components/forms/NewEntry"
 import { EntryDetails } from "../components/entries/ViewEntryDetails"
 import { CategoryList } from "../components/categories/ViewCategories"
+import { CreateComment } from "../components/forms/NewComment"
 
 export const ApplicationViews = ({ token, setToken }) => {
 
     return (
-        <Routes>
+    <>
+    <Routes>
+        <Route>
             <Route path="/login" element={<Login setToken={setToken} />} />
             <Route path="/register" element={<Register setToken={setToken} />} />
-            <Route path="/entries" element={<EntriesList token={token} />} />
-            <Route path="/entries/create" element={<CreateEntry token={token} />} />
-            <Route path="/entries/:entryId" element={<EntryDetails token={token} />} />
-            <Route path="/categories" element={<CategoryList token={token} />} />
-        </Routes>
+            </Route>
+        <Route path="/entries">
+            <Route index element={<EntriesList token={token} />} />
+            <Route path="create" element={<CreateEntry token={token} />} />
+            <Route path=":entryId" element={<EntryDetails token={token} />} />
+        </Route>
+        <Route path="/categories">
+            <Route index element={<CategoryList token={token} />} />
+        </Route>
+        <Route path="/comments">
+            <Route path="create/:entryId" element={<CreateComment token={token} />} />
+        </Route>
+    </Routes>
+    </>
     )
 }
