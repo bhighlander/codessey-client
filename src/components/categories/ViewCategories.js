@@ -22,6 +22,7 @@ export const CategoryList = ({ token }) => {
             .then(() => {
                 getCategories()
             })
+            newCategory.label = ""
     }
 
 

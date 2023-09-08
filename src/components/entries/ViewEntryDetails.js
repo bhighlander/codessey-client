@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { getSingleEntry } from "../../api/entryManager"
+import { addEntryCategory, getSingleEntry } from "../../api/entryManager"
 import { getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
+import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
 
 export const EntryDetails = ({ token }) => {
     const { entryId } = useParams()
     const navigate = useNavigate()
     const [entry, setEntry] = useState({})
     const [comments, setComments] = useState([])
+    const [categories, setCategories] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState([])
+    const [entryCategories, setEntryCategories] = useState([])
 
     useEffect(() => {
         getSingleEntry(entryId, token)
@@ -20,12 +24,43 @@ export const EntryDetails = ({ token }) => {
             .then(setComments)
     }, [entryId, token])
 
+    useEffect(() => {
+        getAllCategories(token)
+            .then(setCategories)
+    }, [token])
+
+    useEffect(() => {
+        getCategoriesByEntryId(entryId, token)
+            .then(setEntryCategories)
+    }, [entryId, token])
+
+    const handleAddCategory = () => {
+        addEntryCategory(entryId, selectedCategory, token)
+            .then(() => {
+                return getCategoriesByEntryId(entryId, token);
+            })
+            .then(updatedCategories => {
+                setEntryCategories(updatedCategories);
+            })
+    };
+    
+
     return (
         <>
         <section className="entry">
             <h3 className="entry__title">{entry.title}</h3>
             <div className="entry__content">{entry.content}</div>
             <div className="entry__date">{entry.publication_date}</div>
+        </section>
+        <section className="categories">
+            <h3>Current Categories</h3>
+            {
+                entryCategories.map(category => {
+                    return <div className="category" key={category.id}>
+                        <div className="category__label">{category.label}</div>
+                    </div>
+                })
+            }
         </section>
         <section className="comments">
             <h3>Comments</h3>
@@ -41,6 +76,21 @@ export const EntryDetails = ({ token }) => {
             <button className="btn btn-primary" onClick={() => {
                 navigate(`/comments/create/${entryId}`)
             }}>Add Comment</button>
+        </section>
+        <section className="categories">
+            <h3>Categories</h3>
+            <select className="form-control" onChange={e => setSelectedCategory(e.target.value)}>
+                <option value="0">Select a category</option>
+                {
+                    categories.filter(category => 
+                        !entryCategories.some(entryCategory => entryCategory.id === category.id)
+                    ).map(category => {
+                        return <option key={category.id} value={category.id}>{category.label}</option>
+                    })
+                }
+            </select>
+
+            <button className="btn btn-primary" onClick={handleAddCategory}>Update Category</button>
         </section>
         </>
     )
