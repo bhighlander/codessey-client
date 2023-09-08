@@ -29,3 +29,13 @@ export const deleteCategory = async (categoryId, token) => {
     });
     return await response.json();
 }
+
+export const getCategoriesByEntryId = async (entryId, token) => {
+    const response = await fetch(`http://localhost:8000/categories?entry=${entryId}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Token ${token}`
+        }
+    });
+    return await response.json();
+}
