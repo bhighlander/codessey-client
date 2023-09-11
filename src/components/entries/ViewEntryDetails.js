@@ -58,6 +58,9 @@ export const EntryDetails = ({ token }) => {
             <h3 className="entry__title">{entry.title}</h3>
             <div className="entry__content">{entry.content}</div>
             <div className="entry__date">{entry.publication_date}</div>
+            <button className="btn btn-primary" onClick={() => {
+                navigate(`/entries/edit/${entryId}`)
+            }}>Edit</button>
             <button className="btn btn-primary" onClick={handleDelete}>Delete</button>
         </section>
         <section className="categories">
