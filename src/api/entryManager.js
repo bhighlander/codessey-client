@@ -70,3 +70,14 @@ export const removeEntryCategory = async (entry_id, category_id, token) => {
         body: JSON.stringify({ category_remove: category_id })
     });
 }
+
+export const updateEntry = async (entry, token) => {
+    await fetch(`http://localhost:8000/entries/${entry.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entry)
+    });
+}

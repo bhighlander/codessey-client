@@ -6,6 +6,7 @@ import { CreateEntry } from "../components/forms/NewEntry"
 import { EntryDetails } from "../components/entries/ViewEntryDetails"
 import { CategoryList } from "../components/categories/ViewCategories"
 import { CreateComment } from "../components/forms/NewComment"
+import { EditEntry } from "../components/forms/EditEntry"
 
 export const ApplicationViews = ({ token, setToken }) => {
 
@@ -20,6 +21,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             <Route index element={<EntriesList token={token} />} />
             <Route path="create" element={<CreateEntry token={token} />} />
             <Route path=":entryId" element={<EntryDetails token={token} />} />
+            <Route path="edit/:entryId" element={<EditEntry token={token} />} />
         </Route>
         <Route path="/categories">
             <Route index element={<CategoryList token={token} />} />
