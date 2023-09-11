@@ -21,13 +21,12 @@ export const addCategory = async (category, token) => {
 }
 
 export const deleteCategory = async (categoryId, token) => {
-    const response = await fetch(`http://localhost:8000/categories/${categoryId}`, {
+    await fetch(`http://localhost:8000/categories/${categoryId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
         }
     });
-    return await response.json();
 }
 
 export const getCategoriesByEntryId = async (entryId, token) => {
