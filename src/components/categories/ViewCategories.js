@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react"
-import { addCategory, getAllCategories } from "../../api/categoryManager"
+import { addCategory, deleteCategory, getAllCategories } from "../../api/categoryManager"
 
 export const CategoryList = ({ token }) => {
     const [categories, setCategories] = useState([])
     const [newCategory, setNewCategory] = useState({label: ""})
+
+    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
+        e.preventDefault()
+        deleteCategory(e.target.id, token)
+            .then(() => {
+                getCategories()
+            })
+    }
 
     const getCategories = () => {
         getAllCategories(token)
@@ -31,7 +39,9 @@ export const CategoryList = ({ token }) => {
             <h2>Categories</h2>
             <div className="categories">
                 {categories.map((category) => {
-                    return <h3 key={category.id}>{category.label}</h3>
+                    return <><h3 key={category.id}>{category.label}</h3>
+            <button className="btn btn-primary" id={category.id} onClick={handleDeleteCategory}>X</button></> 
+            // TODO change button to an icon
                 })}
             </div>
             {/* add a category field */}

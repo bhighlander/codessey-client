@@ -14,7 +14,7 @@ export const EntryDetails = ({ token }) => {
     const [selectedCategory, setSelectedCategory] = useState([])
     const [entryCategories, setEntryCategories] = useState([])
 
-    const handleDelete = () => {
+    const handleDelete = () => { // TODO add mui confirmation modal
         deleteEntry(entryId, token)
             .then(() => {
                 navigate("/entries")
