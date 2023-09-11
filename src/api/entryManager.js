@@ -17,15 +17,21 @@ export const deleteEntry = async (entryId, token) => {
     });
 }
 
-export const getUserEntries = async (token) => {
-    const response = await fetch(`http://localhost:8000/entries?user=true`, {
+export const getUserEntries = async (token, categoryId = null) => {
+    let url = `http://localhost:8000/entries?user=true`;
+    if (categoryId) {
+        url += `&category=${categoryId}`;
+    }
+
+    const response = await fetch(url, {
         method: "GET",
         headers: {
-            "Authorization": `Token ${token}`
+        "Authorization": `Token ${token}`
         }
     });
+
     return await response.json();
-}
+    }  
 
 export const getSingleEntry = async (entryId, token) => {
     const response = await fetch(`http://localhost:8000/entries/${entryId}`, {
