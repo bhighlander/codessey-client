@@ -38,3 +38,14 @@ export const getCategoriesByEntryId = async (entryId, token) => {
     });
     return await response.json();
 }
+
+export const updateCategory = async (category, token) => {
+    await fetch(`http://localhost:8000/categories/${category.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(category)
+    });
+}

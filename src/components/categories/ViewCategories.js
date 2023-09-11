@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { addCategory, deleteCategory, getAllCategories } from "../../api/categoryManager"
+import { EditCategory } from "../forms/EditCategory"
 
 export const CategoryList = ({ token }) => {
     const [categories, setCategories] = useState([])
     const [newCategory, setNewCategory] = useState({label: ""})
+    const [editedCategory, setEditedCategory] = useState(null)
 
     const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
         e.preventDefault()
@@ -33,15 +35,34 @@ export const CategoryList = ({ token }) => {
             newCategory.label = ""
     }
 
+    const toggleEdit = (id) => {
+        if (editedCategory === id) {
+            setEditedCategory(null)
+        } else {
+            setEditedCategory(id)
+        }
+    }
+
 
     return (
         <>
             <h2>Categories</h2>
             <div className="categories">
                 {categories.map((category) => {
-                    return <><h3 key={category.id}>{category.label}</h3>
-            <button className="btn btn-primary" id={category.id} onClick={handleDeleteCategory}>X</button></> 
-            // TODO change button to an icon
+                    return <><h3 onClick={() => toggleEdit(category.id)}>{category.label}</h3>
+            <button className="btn btn-primary" id={category.id} onClick={handleDeleteCategory}>X</button> 
+            {/* TODO change button to an icon */}
+            <div className="editCategory">
+                {editedCategory === category.id && (
+                    <><EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
+                    <div>
+                        <button onClick={() => setEditedCategory(null)}>Cancel</button>
+                    </div></>
+                
+                )
+                }
+            </div>
+            </>
                 })}
             </div>
             {/* add a category field */}
