@@ -9,13 +9,12 @@ export const getEntries = async (token) => {
 }
 
 export const deleteEntry = async (entryId, token) => {
-    const response = await fetch(`http://localhost:8000/entries/${entryId}`, {
+    await fetch(`http://localhost:8000/entries/${entryId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
         }
     });
-    return await response.json();
 }
 
 export const getUserEntries = async (token) => {

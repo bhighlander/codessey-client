@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { addEntryCategory, getSingleEntry } from "../../api/entryManager"
+import { addEntryCategory, deleteEntry, getSingleEntry } from "../../api/entryManager"
 import { getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
@@ -13,6 +13,13 @@ export const EntryDetails = ({ token }) => {
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState([])
     const [entryCategories, setEntryCategories] = useState([])
+
+    const handleDelete = () => {
+        deleteEntry(entryId, token)
+            .then(() => {
+                navigate("/entries")
+            })
+    }
 
     useEffect(() => {
         getSingleEntry(entryId, token)
@@ -51,6 +58,7 @@ export const EntryDetails = ({ token }) => {
             <h3 className="entry__title">{entry.title}</h3>
             <div className="entry__content">{entry.content}</div>
             <div className="entry__date">{entry.publication_date}</div>
+            <button className="btn btn-primary" onClick={handleDelete}>Delete</button>
         </section>
         <section className="categories">
             <h3>Current Categories</h3>

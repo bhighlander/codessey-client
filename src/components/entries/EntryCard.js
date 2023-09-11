@@ -1,16 +1,8 @@
 import { useNavigate } from "react-router"
-import { deleteEntry } from "../../api/entryManager"
 import { Link } from "react-router-dom"
 
 export const EntryCard = ({ entry }) => {
     const navigate = useNavigate()
-
-    const handleDelete = () => {
-        deleteEntry(entry.id)
-            .then(() => {
-                navigate("/entries")
-            })
-    }
 
     return (
         <section className="entry">
@@ -21,7 +13,7 @@ export const EntryCard = ({ entry }) => {
             <button className="btn btn-primary" onClick={() => {
                 navigate(`/entries/edit/${entry.id}`)
             }}>Edit</button>
-            <button className="btn btn-primary" onClick={handleDelete}>Delete</button>
+
         </section>
     )
 }
