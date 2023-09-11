@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } from "../../api/entryManager"
-import { getCommentByEntryId } from "../../api/commentManager"
+import { deleteComment, getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
 
@@ -51,12 +51,21 @@ export const EntryDetails = ({ token }) => {
             })
     };
 
-    const handleDeleteCategory = (e) => {
+    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
         e.preventDefault()
         removeEntryCategory(entryId, e.target.id, token)
             .then(() => {
                 getCategoriesByEntryId(entryId, token)
                     .then(setEntryCategories)
+            })
+    }
+
+    const handleDeleteComment = (e) => { // TODO add mui confirmation modal
+        e.preventDefault()
+        deleteComment(e.target.id, token)
+            .then(() => {
+                getCommentByEntryId(entryId, token)
+                    .then(setComments)
             })
     }
     
@@ -93,6 +102,7 @@ export const EntryDetails = ({ token }) => {
                         <div className="comment__author">{comment.author.user.username}</div>
                         <div className="comment__title"><h3>{comment.title}</h3></div>
                         <div className="comment__content">{comment.content}</div>
+                        <button className="btn btn-primary" id={comment.id} onClick={handleDeleteComment}>Delete</button>
                     </div>
                 })
             }

@@ -19,3 +19,12 @@ export const createComment = async (comment, token) => {
     });
     return await response.json();
 }
+
+export const deleteComment = async (commentId, token) => {
+    await fetch(`http://localhost:8000/comments/${commentId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${token}`
+        }
+    });
+}
