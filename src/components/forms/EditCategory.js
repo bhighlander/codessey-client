@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { updateCategory } from "../../api/categoryManager"
 
-export const EditCategory = ({ token, category, getCategories }) => {
+export const EditCategory = ({ token, category, getCategories, onSave }) => {
     const [editedCategory, setEditedCategory] = useState({id: category.id, label: category.label})
 
     const handleEditCategory = (e) => {
@@ -9,6 +9,7 @@ export const EditCategory = ({ token, category, getCategories }) => {
         updateCategory(editedCategory, token)
             .then(() => {
                 getCategories()
+                onSave()
             })
     }
 
