@@ -17,18 +17,21 @@ export const Register = ({ setToken }) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "username": username.current.value,
-                "first_name": firstName.current.value,
-                "last_name": lastName.current.value,
-                "email": email.current.value,
-                "password": password.current.value
+                username: username.current.value,
+                first_name: firstName.current.value,
+                last_name: lastName.current.value,
+                email: email.current.value,
+                password: password.current.value
             }
 
-            registerUser(newUser)
-                .then(() => loginUser(username.current.value, password.current.value))
-                .then((loginData) => setToken(loginData.token))
-                .then(() => navigate("/"))
-        } else {
+            registerUser(newUser).then(res => {
+                if ("valid" in res && res.valid && "token" in res) {
+                    setToken(res.token)
+                    navigate("/entries")
+                }
+            })
+        }
+        else {
             passwordDialog.current.showModal()
         }
     }

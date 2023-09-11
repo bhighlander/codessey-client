@@ -24,13 +24,13 @@ export const EntriesList = ({ token }) => {
             <select onChange={(e) => setSelectedCategory(e.target.value)}>
                 <option value={null}>All</option>
                 {
-                    categories.map(category => <option key={category.id} value={category.id}>{category.label}</option>)
+                    categories?.map(category => <option key={category.id} value={category.id}>{category.label}</option>)
                 }
             </select>
             <h1>Entries</h1>
             <div className="entries">
                 {
-                    entries.map(entry => <EntryCard key={entry.id} entry={entry} />)
+                    entries?.map(entry => <EntryCard key={entry.id} entry={entry} />)
                 }
             </div>
         </>
