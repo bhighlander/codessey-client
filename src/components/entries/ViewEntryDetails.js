@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { addEntryCategory, deleteEntry, getSingleEntry } from "../../api/entryManager"
+import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } from "../../api/entryManager"
 import { getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
@@ -50,6 +50,15 @@ export const EntryDetails = ({ token }) => {
                 setEntryCategories(updatedCategories);
             })
     };
+
+    const handleDeleteCategory = (e) => {
+        e.preventDefault()
+        removeEntryCategory(entryId, e.target.id, token)
+            .then(() => {
+                getCategoriesByEntryId(entryId, token)
+                    .then(setEntryCategories)
+            })
+    }
     
 
     return (
@@ -67,9 +76,12 @@ export const EntryDetails = ({ token }) => {
             <h3>Current Categories</h3>
             {
                 entryCategories.map(category => {
-                    return <div className="category" key={category.id}>
+                    return <>
+                    <div className="category" key={category.id}>
                         <div className="category__label">{category.label}</div>
                     </div>
+                    <button className="btn btn-primary" id={category.id} onClick={handleDeleteCategory}>X</button>
+                    </>
                 })
             }
         </section>
