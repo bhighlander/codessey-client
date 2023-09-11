@@ -48,7 +48,7 @@ export const CategoryList = ({ token }) => {
         <>
             <h2>Categories</h2>
             <div className="categories">
-                {categories.map((category) => {
+                {categories?.map((category) => {
                     return <><h3 onClick={() => toggleEdit(category.id)}>{category.label}</h3>
             <button className="btn btn-primary" id={category.id} onClick={handleDeleteCategory}>X</button> 
             {/* TODO change button to an icon */}
