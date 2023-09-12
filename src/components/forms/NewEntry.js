@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router"
 import { createEntry } from "../../api/entryManager"
 import { useState } from "react"
+import { TextField } from "@mui/material"
+import { FormControl } from "@mui/base"
+import { Button } from "@mui/material"
 
 export const CreateEntry = ({ token }) => {
     const navigate = useNavigate()
@@ -21,43 +24,39 @@ export const CreateEntry = ({ token }) => {
     return (
         <form className="entryForm" onSubmit={handleSubmitPost}>
             <h2 className="entryForm__title">New Entry</h2>
-            <fieldset>
-                <label htmlFor="title">Title:</label>
-                <input
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newPost }
-                            copy.title = evt.target.value
-                            setNewPost(copy)
-                        }
-                    }
-                    required autoFocus
-                    type="text"
-                    className="form-control"
-                    placeholder="Title"
-                />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="content">Content:</label>
-                <textarea
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newPost }
-                            copy.content = evt.target.value
-                            setNewPost(copy)
-                        }
-                    }
-                    required autoFocus
-                    type="text"
-                    className="form-control"
-                    placeholder="Content"
-                />
-            </fieldset>
-            <fieldset>
-                <button type="submit">
-                    Save Entry
-                </button>
-            </fieldset>
+            <FormControl>
+            <TextField
+                className="form-control"
+                id='title'
+                label="Title"
+                variant="outlined"
+                required
+                autoFocus
+                onChange={(e) => {
+                    const copy = { ...newPost }
+                    copy.title = e.target.value
+                    setNewPost(copy)
+                }}
+            />
+            </FormControl>
+            <FormControl>
+            <TextField
+                className="form-control"
+                id='content'
+                label="Content"
+                variant="outlined"
+                multiline
+                rows={4}
+                required
+                autoFocus
+                onChange={(e) => {
+                    const copy = { ...newPost }
+                    copy.content = e.target.value
+                    setNewPost(copy)
+                }}
+            />
+            </FormControl>
+            <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
         </form>
     )
 }

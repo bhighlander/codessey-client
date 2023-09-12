@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { createComment } from "../../api/commentManager"
+import { FormControl } from "@mui/base"
+import { Button, TextField } from "@mui/material"
 
 export const CreateComment = ({ token }) => {
     const { entryId } = useParams()
@@ -23,43 +25,39 @@ export const CreateComment = ({ token }) => {
     return (
         <form className="commentForm" onSubmit={handleSubmitComment}>
             <h2 className="commentForm__title">New Comment</h2>
-            <fieldset>
-                <label htmlFor="title">Title:</label>
-                <input
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newComment }
-                            copy.title = evt.target.value
-                            setNewComment(copy)
-                        }
-                    }
-                    required autoFocus
-                    type="text"
+            <FormControl>
+                <TextField
                     className="form-control"
-                    placeholder="Title"
+                    id='title'
+                    label="Title"
+                    variant="outlined"
+                    required
+                    autoFocus
+                    onChange={(e) => {
+                        const copy = { ...newComment }
+                        copy.title = e.target.value
+                        setNewComment(copy)
+                    }}
                 />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="content">Content:</label>
-                <textarea
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newComment }
-                            copy.content = evt.target.value
-                            setNewComment(copy)
-                        }
-                    }
-                    required autoFocus
-                    type="text"
+            </FormControl>
+            <FormControl>
+                <TextField
                     className="form-control"
-                    placeholder="Content"
+                    id='content'
+                    label="Content"
+                    variant="outlined"
+                    multiline
+                    rows={4}
+                    required
+                    autoFocus
+                    onChange={(e) => {
+                        const copy = { ...newComment }
+                        copy.content = e.target.value
+                        setNewComment(copy)
+                    }}
                 />
-            </fieldset>
-            <fieldset>
-                <button type="submit">
-                    Save Comment
-                </button>
-            </fieldset>
+            </FormControl>
+            <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
         </form>
     )
 }

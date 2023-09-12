@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getSingleEntry, updateEntry } from "../../api/entryManager"
+import { Button, TextField } from "@mui/material"
+import { FormControl } from "@mui/base"
 
 export const EditEntry = ({ token }) => {
     const { entryId } = useParams()
@@ -25,45 +27,43 @@ export const EditEntry = ({ token }) => {
     return (
         <form className="entryForm" onSubmit={handleUpdate}>
             <h2 className="entryForm__title">Edit Entry</h2>
-            <fieldset>
-                <label htmlFor="title">Title:</label>
-                <input
-                    onChange={
-                        (evt) => {
-                            const copy = { ...entry }
-                            copy.title = evt.target.value
-                            setEntry(copy)
-                        }
-                    }
-                    required autoFocus
-                    type="text"
-                    className="form-control"
-                    placeholder="Title"
-                    value={entry.title}
-                />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="content">Content:</label>
-                <textarea
-                    onChange={
-                        (evt) => {
-                            const copy = { ...entry }
-                            copy.content = evt.target.value
-                            setEntry(copy)
-                        }
-                    }
-                    required autoFocus
-                    type="text"
-                    className="form-control"
-                    placeholder="Content"
-                    value={entry.content}
-                />
-            </fieldset>
-            <fieldset>
-                <button type="submit">
-                    Save Entry
-                </button>
-            </fieldset>
+            <FormControl>
+            <TextField
+                className="form-control"
+                id='title'
+                label="Title"
+                variant="outlined"
+                required
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+                value={entry.title}
+                onChange={(e) => {
+                    const copy = { ...entry }
+                    copy.title = e.target.value
+                    setEntry(copy)
+                }}
+            />
+            </FormControl>
+            <FormControl>
+            <TextField
+                className="form-control"
+                id='content'
+                label="Content"
+                variant="outlined"
+                multiline
+                rows={4}
+                required
+                autoFocus
+                InputLabelProps={{ shrink: true }}
+                value={entry.content}
+                onChange={(e) => {
+                    const copy = { ...entry }
+                    copy.content = e.target.value
+                    setEntry(copy)
+                }}
+            />
+            </FormControl>
+            <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
         </form>
     )
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { addCategory, deleteCategory, getAllCategories } from "../../api/categoryManager"
 import { EditCategory } from "../forms/EditCategory"
+import { Button, TextField } from "@mui/material"
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 export const CategoryList = ({ token }) => {
     const [categories, setCategories] = useState([])
@@ -50,13 +52,12 @@ export const CategoryList = ({ token }) => {
             <div className="categories">
                 {categories?.map((category) => {
                     return <><h3 onClick={() => toggleEdit(category.id)}>{category.label}</h3>
-            <button className="btn btn-primary" id={category.id} onClick={handleDeleteCategory}>X</button> 
-            {/* TODO change button to an icon */}
+            <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
             <div className="editCategory">
                 {editedCategory === category.id && (
                     <><EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
                     <div>
-                        <button onClick={() => setEditedCategory(null)}>Cancel</button>
+                        <Button onClick={() => setEditedCategory(null)}>Cancel</Button>
                     </div></>
                 
                 )
@@ -68,26 +69,21 @@ export const CategoryList = ({ token }) => {
             {/* add a category field */}
             <form className="form--category">
                 <h2 className="form--category__title">Add a Category</h2>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="label">Label:</label>
-                        <input
-                        type="text"
-                        id="label" 
-                        name="label" 
-                        required 
-                        autoFocus 
-                        className="form-control" 
-                        value={newCategory.label}
-                        onChange={(e) => {
-                            const copy = {...newCategory}
-                            copy.label = e.target.value
-                            setNewCategory(copy)
-                        }}
-                        />
-                    </div>
-                </fieldset>
-                <button className="btn btn-primary" onClick={handleAddCategory}>Save Category</button>
+                <TextField
+                    className="form-control"
+                    id='label'
+                    label="Label"
+                    variant="outlined"
+                    required
+                    autoFocus
+                    value={newCategory.label}
+                    onChange={(e) => {
+                        const copy = {...newCategory}
+                        copy.label = e.target.value
+                        setNewCategory(copy)
+                    }}
+                />
+                <Button variant="contained" onClick={handleAddCategory}>Save Category</Button>
             </form>
         </>
     )

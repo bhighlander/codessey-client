@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { updateCategory } from "../../api/categoryManager"
+import { Button } from "@mui/material"
 
 export const EditCategory = ({ token, category, getCategories, onSave }) => {
     const [editedCategory, setEditedCategory] = useState({id: category.id, label: category.label})
@@ -36,7 +37,7 @@ export const EditCategory = ({ token, category, getCategories, onSave }) => {
                         />
                     </div>
                 </fieldset>
-                <button className="btn btn-primary" onClick={handleEditCategory}>Save</button>
+                <Button variant="contained" className="btn btn-primary" onClick={handleEditCategory}>Save</Button>
             </form>
         </>
     )
