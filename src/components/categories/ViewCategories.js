@@ -57,7 +57,7 @@ export const CategoryList = ({ token }) => {
                 {editedCategory === category.id && (
                     <><EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
                     <div>
-                        <button onClick={() => setEditedCategory(null)}>Cancel</button>
+                        <Button onClick={() => setEditedCategory(null)}>Cancel</Button>
                     </div></>
                 
                 )

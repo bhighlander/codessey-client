@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 export const NavBar = ({ token, setToken }) => {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ export const NavBar = ({ token, setToken }) => {
                 <Link className="navbar__link" to="/entries/create">New Entry</Link>
                 <div className="buttons">
                             {token ? (
-                                <button
+                                <Button
                                     className="button is-outlined"
                                     onClick={() => {
                                         setToken("");
@@ -22,7 +23,7 @@ export const NavBar = ({ token, setToken }) => {
                                     }}
                                 >
                                     Logout
-                                </button>
+                                </Button>
                             ) : (
                                 <>
                                     <Link to="/register" className="button is-link">
