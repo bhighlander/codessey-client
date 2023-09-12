@@ -1,7 +1,10 @@
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { loginUser } from "../../api/authManager"
-import { Link } from "react-router-dom"
+import { Button } from '@mui/material';
+import Link from '@mui/material/Link';
 
 export const Login = ({ setToken }) => {
     const username = useRef()
@@ -31,40 +34,40 @@ export const Login = ({ setToken }) => {
     }
 
     return (
-        <main className="container--login">
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Codessey</h1>
-                    <h2>Please sign in</h2>
-                    <fieldset>
-                        <label htmlFor="inputUsername"> Username </label>
-                        <input ref={username} type="username"
-                            id="username"
-                            className="form-control"
-                            placeholder="Username"
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password"
-                            id="password"
-                            className="form-control"
-                            placeholder="Password"
-                            required />
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit">
-                            Sign in
-                        </button>
-                    </fieldset>
-                </form>
-            </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
-            </section>
-            {
+        <>
+        <h1>Codessey</h1>
+        <h2>Please sign in</h2>
+        <form onSubmit={handleLogin}>
+        <FormControl>
+        <TextField
+        className="form-control"
+        id='username'
+        label="Username"
+        variant="outlined"
+        required
+        ref={username}
+        onChange={(e) => {username.current.value = e.target.value}}
+        />
+        </FormControl>
+        <FormControl>
+        <TextField
+        className="form-control"
+        id='password'
+        label="Password"
+        variant="outlined"
+        type='password'
+        required
+        ref={password}
+        onChange={(e) => {password.current.value = e.target.value}}
+        />
+        </FormControl>
+        <Button variant="contained" type='submit'>Login</Button>
+        </form>
+        <Link to="/register">Not a member yet?</Link>
+        {
             isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
-            }
-        </main>
+        }
+</>
+
     )
 }
