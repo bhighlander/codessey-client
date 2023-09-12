@@ -1,6 +1,8 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { registerUser, loginUser } from "../../api/authManager"
+import { registerUser } from "../../api/authManager"
+import { FormControl } from "@mui/base"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Link, TextField } from "@mui/material"
 
 export const Register = ({ setToken }) => {
     const firstName = useRef()
@@ -9,8 +11,8 @@ export const Register = ({ setToken }) => {
     const username = useRef()
     const password = useRef()
     const verifyPassword = useRef()
-    const passwordDialog = useRef()
     const navigate = useNavigate()
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -32,50 +34,96 @@ export const Register = ({ setToken }) => {
             })
         }
         else {
-            passwordDialog.current.showModal()
+            setIsDialogOpen(true)
         }
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-            <dialog className="dialog dialog--password" ref={passwordDialog}>
-                <div>Passwords do not match</div>
-                <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
-            </dialog>
-
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
-                <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputUsername"> Username </label>
-                    <input ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
-                </fieldset>
-                <fieldset style={{
-                    textAlign: "center"
-                }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
-                    <button className="btn btn-1 btn-sep icon-send" onClick={() => navigate("/login")}>Already registered?</button>
-                </fieldset>
-            </form>
-        </main>
+    <>
+    <Dialog className="passwordDialog" open={isDialogOpen}>
+        <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+                Passwords do not match.
+            </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
+        </DialogActions>
+    </Dialog>
+    <h1>Welcome to Codessey</h1>
+    <h2>Please register</h2>
+    <form onSubmit={handleRegister}>
+        <FormControl>
+            <TextField
+                className="form-control"
+                id='firstName'
+                label="First Name"
+                variant="outlined"
+                required
+                ref={firstName}
+                onChange={(e) => {firstName.current.value = e.target.value}}
+            />
+        </FormControl>
+        <FormControl>
+            <TextField
+                className="form-control"
+                id='lastName'
+                label="Last Name"
+                variant="outlined"
+                required
+                ref={lastName}
+                onChange={(e) => {lastName.current.value = e.target.value}}
+            />
+        </FormControl>
+        <FormControl>
+            <TextField
+                className="form-control"
+                id='email'
+                label="Email"
+                variant="outlined"
+                required
+                ref={email}
+                onChange={(e) => {email.current.value = e.target.value}}
+            />
+        </FormControl>
+        <FormControl>
+            <TextField
+                className="form-control"
+                id='username'
+                label="Username"
+                variant="outlined"
+                required
+                ref={username}
+                onChange={(e) => {username.current.value = e.target.value}}
+            />
+        </FormControl>
+        <FormControl>
+            <TextField
+                className="form-control"
+                id='password'
+                label="Password"
+                variant="outlined"
+                type='password'
+                required
+                ref={password}
+                onChange={(e) => {password.current.value = e.target.value}}
+            />
+        </FormControl>
+        <FormControl>
+            <TextField
+                className="form-control"
+                id='verifyPassword'
+                label="Verify Password"
+                variant="outlined"
+                type='password'
+                required
+                ref={verifyPassword}
+                onChange={(e) => {verifyPassword.current.value = e.target.value}}
+            />
+        </FormControl>
+        <Button variant="contained" type='submit'>Register</Button>
+    </form>
+        <Link href="/login">Already registered? Login here.</Link>
+    </>
     )
 }

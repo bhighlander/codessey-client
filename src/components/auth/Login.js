@@ -63,7 +63,7 @@ export const Login = ({ setToken }) => {
         </FormControl>
         <Button variant="contained" type='submit'>Login</Button>
         </form>
-        <Link to="/register">Not a member yet?</Link>
+        <Link href="/register">Not a member yet?</Link>
         {
             isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
         }
