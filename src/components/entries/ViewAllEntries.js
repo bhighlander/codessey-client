@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { EntryCard } from "./EntryCard"
 import { getUserEntries } from "../../api/entryManager"
 import { getAllCategories } from "../../api/categoryManager"
+import { MenuItem, Select } from "@mui/material"
 
 export const EntriesList = ({ token }) => {
     const [entries, setEntries] = useState([])
@@ -21,12 +22,12 @@ export const EntriesList = ({ token }) => {
     return (
         <>
             <h2>Filter Entries</h2>
-            <select onChange={(e) => setSelectedCategory(e.target.value)}>
-                <option value={null}>All</option>
+            <Select fullWidth onChange={(e) => setSelectedCategory(e.target.value)}>
+                <MenuItem value={null}>All</MenuItem>
                 {
-                    categories?.map(category => <option key={category.id} value={category.id}>{category.label}</option>)
+                    categories?.map(category => <MenuItem key={category.id} value={category.id}>{category.label}</MenuItem>)
                 }
-            </select>
+            </Select>
             <h1>Entries</h1>
             <div className="entries">
                 {
