@@ -4,6 +4,7 @@ import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } fr
 import { deleteComment, getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
 
 export const EntryDetails = ({ token }) => {
     const { entryId } = useParams()
@@ -13,13 +14,27 @@ export const EntryDetails = ({ token }) => {
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState([])
     const [entryCategories, setEntryCategories] = useState([])
+    const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false)
 
-    const handleDelete = () => { // TODO add mui confirmation modal
-        deleteEntry(entryId, token)
-            .then(() => {
-                navigate("/entries")
-            })
+    const handleDeleteConfirmationModalOpen = () => {
+        setDeleteConfirmationModalOpen(true)
     }
+
+    const handleDelete = () => {
+        handleDeleteConfirmationModalOpen()
+
+    }
+
+    const handleDeleteConfirmationModalClose = (shouldDelete) => {
+        if (shouldDelete) {
+            deleteEntry(entryId, token)
+                .then(() => {
+                    navigate("/entries")
+                })
+        }
+        setDeleteConfirmationModalOpen(false)
+    }
+
 
     useEffect(() => {
         getSingleEntry(entryId, token)
@@ -125,6 +140,27 @@ export const EntryDetails = ({ token }) => {
 
             <button className="btn btn-primary" onClick={handleAddCategory}>Update Category</button>
         </section>
+        <Dialog
+        open={deleteConfirmationModalOpen}
+        onClose={() => handleDeleteConfirmationModalClose(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle id="alert-dialog-title">
+            Are you sure you want to delete this listing?
+        </DialogTitle>
+        <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+            This action cannot be undone.
+            </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={() => handleDeleteConfirmationModalClose(false)}>Cancel</Button>
+            <Button onClick={() => handleDeleteConfirmationModalClose(true)} autoFocus>
+            Delete
+            </Button>
+        </DialogActions>
+        </Dialog>
         </>
     )
 }
