@@ -37,9 +37,8 @@ export const EntryDetails = ({ token }) => {
         setDeleteEntryModal(false)
     }
 
-    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
-        e.preventDefault()
-        removeEntryCategory(entryId, e.target.id, token)
+    const handleDeleteCategory = (categoryId) => { // TODO add mui confirmation modal
+        removeEntryCategory(entryId, categoryId, token)
             .then(() => {
                 getCategoriesByEntryId(entryId, token)
                     .then(setEntryCategories)
@@ -102,12 +101,13 @@ export const EntryDetails = ({ token }) => {
             <h3>Current Categories</h3>
             {
                 entryCategories.map(category => {
-                    return <>
-                    <div className="category" key={category.id}>
-                        <div className="category__label">{category.label}</div>
-                    </div>
-                    <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
-                    </>
+                    return (
+                    <div key={category.id}>
+                        <div className="category" key={category.id}>
+                            <div className="category__label">{category.label}</div>
+                        </div>
+                        <HighlightOffOutlinedIcon onClick={() => handleDeleteCategory(category.id)} />
+                    </div>)
                 })
             }
         </section>

@@ -30,6 +30,7 @@ export const CreateEntry = ({ token }) => {
                 id='title'
                 label="Title"
                 variant="outlined"
+                margin="normal"
                 required
                 autoFocus
                 onChange={(e) => {
@@ -45,8 +46,10 @@ export const CreateEntry = ({ token }) => {
                 id='content'
                 label="Content"
                 variant="outlined"
+                margin="normal"
                 multiline
-                rows={4}
+                rows={6}
+                maxRows={6}
                 required
                 autoFocus
                 onChange={(e) => {
