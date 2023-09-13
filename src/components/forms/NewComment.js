@@ -32,8 +32,8 @@ export const CreateComment = ({ token }) => {
                     id='title'
                     label="Title"
                     variant="outlined"
+                    margin="normal"
                     required
-                    autoFocus
                     onChange={(e) => {
                         const copy = { ...newComment }
                         copy.title = e.target.value
@@ -47,10 +47,10 @@ export const CreateComment = ({ token }) => {
                     id='content'
                     label="Content"
                     variant="outlined"
+                    margin="normal"
                     multiline
                     rows={4}
                     required
-                    autoFocus
                     onChange={(e) => {
                         const copy = { ...newComment }
                         copy.content = e.target.value
