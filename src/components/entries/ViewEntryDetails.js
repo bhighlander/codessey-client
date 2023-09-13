@@ -4,7 +4,7 @@ import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } fr
 import { deleteComment, getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 
 export const EntryDetails = ({ token }) => {
@@ -129,17 +129,18 @@ export const EntryDetails = ({ token }) => {
         </section>
         <section className="categories">
             <h3>Categories</h3>
-            <select className="form-control" onChange={e => setSelectedCategory(e.target.value)}>
-                <option value="0">Select a category</option>
+            <FormControl sx={{m:1, minWidth: 120}} size="small">
+            <Select fullWidth value={selectedCategory} className="form-control" onChange={e => setSelectedCategory(e.target.value)}>
+                <InputLabel id="category-label">Select a Category</InputLabel>
                 {
                     categories.filter(category => 
                         !entryCategories.some(entryCategory => entryCategory.id === category.id)
                     ).map(category => {
-                        return <option key={category.id} value={category.id}>{category.label}</option>
+                        return <MenuItem key={category.id} value={category.id}>{category.label}</MenuItem>
                     })
                 }
-            </select>
-
+            </Select>
+            </FormControl>
             <Button className="btn btn-primary" onClick={handleAddCategory}>Update Category</Button>
         </section>
         <Dialog

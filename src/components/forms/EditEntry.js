@@ -7,7 +7,7 @@ import { FormControl } from "@mui/base"
 export const EditEntry = ({ token }) => {
     const { entryId } = useParams()
     const navigate = useNavigate()
-    const [entry, setEntry] = useState({})
+    const [entry, setEntry] = useState({title: "", content: ""})
 
     const handleUpdate = (e) => {
         e.preventDefault()
