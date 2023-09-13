@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@mui/material'
+import { BottomNavigation, BottomNavigationAction, Button, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
+import { Category, Logout, Note, NoteAdd } from '@mui/icons-material';
 
 export const NavBar = ({ token, setToken }) => {
     const navigate = useNavigate();
@@ -11,25 +12,21 @@ export const NavBar = ({ token, setToken }) => {
 
     return (
         <header className="navbar">
-            <span className="navbar__title">Codessey</span>
-            <nav>
-                <Link className="navbar__link" href="/">Home</Link>
-                <Link className="navbar__link" href="/entries">Entries</Link>
-                <Link className="navbar__link" href="/categories">Categories</Link>
-                <Link className="navbar__link" href="/entries/create">New Entry</Link>
-                <div className="buttons">
-
-                        <Button
-                            className="button is-outlined"
-                            onClick={() => {
-                                setToken("");
-                                navigate("/login");
-                            }}
-                        >
-                            Logout
-                        </Button>
-                </div>
-            </nav>
+            <BottomNavigation
+            showLabels
+            className="navbar__links"
+            >
+                <Typography>Codessey</Typography> {/* replace with logo */}
+                <BottomNavigationAction label="Entries" icon={<Note />} onClick={() => navigate("/entries")}/>
+                <BottomNavigationAction label="Categories" icon={<Category />} onClick={() => navigate("/categories")}/>
+                <BottomNavigationAction label="New Entry" icon={<NoteAdd />} onClick={() => navigate("/entries/create")}/>
+                <BottomNavigationAction label="Logout" icon={<Logout />}
+                onClick={() => {
+                    setToken("")
+                    navigate("/login")
+                }}
+                />
+            </BottomNavigation>
         </header>
     );
 }
