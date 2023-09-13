@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
+import { CommentCard } from "../comments/CommentCard"
 
 export const EntryDetails = ({ token }) => {
     const { entryId } = useParams()
@@ -16,8 +17,6 @@ export const EntryDetails = ({ token }) => {
     const [selectedCategory, setSelectedCategory] = useState([])
     const [entryCategories, setEntryCategories] = useState([])
     const [deleteEntryModal, setDeleteEntryModal] = useState(false)
-    const [deleteCommentModal, setDeleteCommentModal] = useState(false)
-    const [deleteCategoryModal, setDeleteCategoryModal] = useState(false)
 
     const handleDeleteEntry = () => {
         handleDeleteEntryModal()
@@ -44,16 +43,6 @@ export const EntryDetails = ({ token }) => {
                     .then(setEntryCategories)
             })
     }
-
-    const handleDeleteComment = (e) => { // TODO add mui confirmation modal
-        e.preventDefault()
-        deleteComment(e.target.id, token)
-            .then(() => {
-                getCommentByEntryId(entryId, token)
-                    .then(setComments)
-            })
-    }
-    
 
     useEffect(() => {
         getSingleEntry(entryId, token)
@@ -111,22 +100,16 @@ export const EntryDetails = ({ token }) => {
                 })
             }
         </Box>
+
         <Box className="comments">
             <Typography>Comments</Typography>
             {
-                comments.map(comment => {
-                    return <div className="comment" key={comment.id}>
-                        <div className="comment__author">{comment.author.user.username}</div>
-                        <div className="comment__title"><Typography>{comment.title}</Typography></div>
-                        <div className="comment__content"><Typography>{comment.content}</Typography></div>
-                        <Button className="btn btn-primary" onClick={() => handleDeleteComment(comment.id)}>Delete</Button>
-                    </div>
-                })
+                comments?.map(comment => <CommentCard key={comment.id} comment={comment} token={token} getComments={() => getCommentByEntryId(entryId, token).then(setComments)} />)
             }
+        </Box>
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/comments/create/${entryId}`)
             }}>Add Comment</Button>
-        </Box>
         <Box className="categories">
             <Typography>Categories</Typography>
             <FormControl sx={{m:1, minWidth: 120}} size="small">
@@ -159,9 +142,7 @@ export const EntryDetails = ({ token }) => {
         </DialogContent>
         <DialogActions>
             <Button onClick={() => handleDeleteEntryModalClose(false)}>Cancel</Button>
-            <Button onClick={() => handleDeleteEntryModalClose(true)} autoFocus>
-            Delete
-            </Button>
+            <Button onClick={() => handleDeleteEntryModalClose(true)}>Delete</Button>
         </DialogActions>
         </Dialog>
         </>
