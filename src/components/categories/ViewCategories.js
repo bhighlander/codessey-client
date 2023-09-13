@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { addCategory, deleteCategory, getAllCategories } from "../../api/categoryManager"
 import { EditCategory } from "../forms/EditCategory"
-import { Button, TextField } from "@mui/material"
+import { Box, Button, TextField, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 export const CategoryList = ({ token }) => {
@@ -47,11 +47,11 @@ export const CategoryList = ({ token }) => {
 
 
     return (
-        <>
-            <h2>Categories</h2>
+        <Box>
+            <Typography>Categories</Typography>
             <div className="categories">
                 {categories?.map((category) => {
-                    return <><h3 key={category.id} onClick={() => toggleEdit(category.id)}>{category.label}</h3>
+                    return <><Typography key={category.id} onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
             <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
             <div className="editCategory">
                 {editedCategory === category.id && (
@@ -68,7 +68,7 @@ export const CategoryList = ({ token }) => {
             </div>
             {/* add a category field */}
             <form className="form--category">
-                <h2 className="form--category__title">Add a Category</h2>
+                <Typography className="form--category__title">Add a Category</Typography>
                 <TextField
                     className="form-control"
                     id='label'
@@ -84,6 +84,6 @@ export const CategoryList = ({ token }) => {
                 />
                 <Button variant="contained" onClick={handleAddCategory}>Save Category</Button>
             </form>
-        </>
+        </Box>
     )
 }

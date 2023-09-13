@@ -3,7 +3,7 @@ import FormControl from '@mui/material/FormControl';
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { loginUser } from "../../api/authManager"
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 
 export const Login = ({ setToken }) => {
@@ -34,9 +34,9 @@ export const Login = ({ setToken }) => {
     }
 
     return (
-        <>
-        <h1>Codessey</h1>
-        <h2>Please sign in</h2>
+        <Box>
+        <Typography>Codessey</Typography>
+        <Typography>Please sign in</Typography>
         <form onSubmit={handleLogin}>
         <FormControl>
         <TextField
@@ -67,7 +67,7 @@ export const Login = ({ setToken }) => {
         {
             isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
         }
-</>
+</Box>
 
     )
 }

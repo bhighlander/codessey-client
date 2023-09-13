@@ -20,7 +20,6 @@ export const EntriesList = ({ token }) => {
     }, [token, selectedCategory])
 
     return (
-        <>
         <Box className="all-entries" sx={{ display: "flex", flexDirection: "row"}}>
             <Box className="entries-list" sx={{ display: "flex", flexDirection: "column" }}>
             <Typography>Entries</Typography>
@@ -40,6 +39,5 @@ export const EntriesList = ({ token }) => {
             </FormControl>
             </Box>
         </Box>
-        </>
     )
 }

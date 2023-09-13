@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
 import { createEntry } from "../../api/entryManager"
 import { useState } from "react"
-import { TextField } from "@mui/material"
+import { Box, TextField, Typography } from "@mui/material"
 import { FormControl } from "@mui/base"
 import { Button } from "@mui/material"
 
@@ -22,8 +22,9 @@ export const CreateEntry = ({ token }) => {
     }
 
     return (
+    <Box>
         <form className="entryForm" onSubmit={handleSubmitPost}>
-            <h2 className="entryForm__title">New Entry</h2>
+            <Typography className="entryForm__title">New Entry</Typography>
             <FormControl>
             <TextField
                 className="form-control"
@@ -32,7 +33,6 @@ export const CreateEntry = ({ token }) => {
                 variant="outlined"
                 margin="normal"
                 required
-                autoFocus
                 onChange={(e) => {
                     const copy = { ...newPost }
                     copy.title = e.target.value
@@ -51,7 +51,6 @@ export const CreateEntry = ({ token }) => {
                 rows={6}
                 maxRows={6}
                 required
-                autoFocus
                 onChange={(e) => {
                     const copy = { ...newPost }
                     copy.content = e.target.value
@@ -61,5 +60,6 @@ export const CreateEntry = ({ token }) => {
             </FormControl>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
         </form>
+    </Box>
     )
 }

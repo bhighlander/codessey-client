@@ -4,7 +4,7 @@ import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } fr
 import { deleteComment, getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 
 export const EntryDetails = ({ token }) => {
@@ -88,37 +88,37 @@ export const EntryDetails = ({ token }) => {
 
     return (
         <>
-        <section className="entry">
-            <h3 className="entry__title">{entry.title}</h3>
+        <Box className="entry">
+            <Typography className="entry__title">{entry.title}</Typography>
             <div className="entry__content">{entry.content}</div>
             <div className="entry__date">{entry.publication_date}</div>
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/entries/edit/${entryId}`)
             }}>Edit</Button>
             <Button className="btn btn-primary" onClick={handleDeleteEntry}>Delete</Button>
-        </section>
-        <section className="categories">
-            <h3>Current Categories</h3>
+        </Box>
+        <Box className="categories">
+            <Typography>Current Categories</Typography>
             {
                 entryCategories.map(category => {
                     return (
                     <div key={category.id}>
                         <div className="category" key={category.id}>
                             <div className="category__label">{category.label}</div>
-                        </div>
                         <HighlightOffOutlinedIcon onClick={() => handleDeleteCategory(category.id)} />
+                        </div>
                     </div>)
                 })
             }
-        </section>
-        <section className="comments">
-            <h3>Comments</h3>
+        </Box>
+        <Box className="comments">
+            <Typography>Comments</Typography>
             {
                 comments.map(comment => {
                     return <div className="comment" key={comment.id}>
                         <div className="comment__author">{comment.author.user.username}</div>
-                        <div className="comment__title"><h3>{comment.title}</h3></div>
-                        <div className="comment__content">{comment.content}</div>
+                        <div className="comment__title"><Typography>{comment.title}</Typography></div>
+                        <div className="comment__content"><Typography>{comment.content}</Typography></div>
                         <Button className="btn btn-primary" id={comment.id} onClick={handleDeleteComment}>Delete</Button>
                     </div>
                 })
@@ -126,9 +126,9 @@ export const EntryDetails = ({ token }) => {
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/comments/create/${entryId}`)
             }}>Add Comment</Button>
-        </section>
-        <section className="categories">
-            <h3>Categories</h3>
+        </Box>
+        <Box className="categories">
+            <Typography>Categories</Typography>
             <FormControl sx={{m:1, minWidth: 120}} size="small">
             <Select fullWidth value={selectedCategory} className="form-control" onChange={e => setSelectedCategory(e.target.value)}>
                 <InputLabel id="category-label">Select a Category</InputLabel>
@@ -142,7 +142,7 @@ export const EntryDetails = ({ token }) => {
             </Select>
             </FormControl>
             <Button className="btn btn-primary" onClick={handleAddCategory}>Update Category</Button>
-        </section>
+        </Box>
         <Dialog
         open={deleteEntryModal}
         onClose={() => handleDeleteEntryModalClose(false)}
