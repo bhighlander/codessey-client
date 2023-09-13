@@ -4,7 +4,7 @@ import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } fr
 import { deleteComment, getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 
 export const EntryDetails = ({ token }) => {
@@ -15,27 +15,45 @@ export const EntryDetails = ({ token }) => {
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState([])
     const [entryCategories, setEntryCategories] = useState([])
-    const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false)
+    const [deleteEntryModal, setDeleteEntryModal] = useState(false)
+    const [deleteCommentModal, setDeleteCommentModal] = useState(false)
+    const [deleteCategoryModal, setDeleteCategoryModal] = useState(false)
 
-    const handleDeleteConfirmationModalOpen = () => {
-        setDeleteConfirmationModalOpen(true)
+    const handleDeleteEntry = () => {
+        handleDeleteEntryModal()
     }
 
-    const handleDelete = () => {
-        handleDeleteConfirmationModalOpen()
-
+    const handleDeleteEntryModal = () => {
+        setDeleteEntryModal(true)
     }
 
-    const handleDeleteConfirmationModalClose = (shouldDelete) => {
+    const handleDeleteEntryModalClose = (shouldDelete) => {
         if (shouldDelete) {
             deleteEntry(entryId, token)
                 .then(() => {
                     navigate("/entries")
                 })
         }
-        setDeleteConfirmationModalOpen(false)
+        setDeleteEntryModal(false)
     }
 
+    const handleDeleteCategory = (categoryId) => { // TODO add mui confirmation modal
+        removeEntryCategory(entryId, categoryId, token)
+            .then(() => {
+                getCategoriesByEntryId(entryId, token)
+                    .then(setEntryCategories)
+            })
+    }
+
+    const handleDeleteComment = (e) => { // TODO add mui confirmation modal
+        e.preventDefault()
+        deleteComment(e.target.id, token)
+            .then(() => {
+                getCommentByEntryId(entryId, token)
+                    .then(setComments)
+            })
+    }
+    
 
     useEffect(() => {
         getSingleEntry(entryId, token)
@@ -67,83 +85,67 @@ export const EntryDetails = ({ token }) => {
             })
     };
 
-    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
-        e.preventDefault()
-        removeEntryCategory(entryId, e.target.id, token)
-            .then(() => {
-                getCategoriesByEntryId(entryId, token)
-                    .then(setEntryCategories)
-            })
-    }
-
-    const handleDeleteComment = (e) => { // TODO add mui confirmation modal
-        e.preventDefault()
-        deleteComment(e.target.id, token)
-            .then(() => {
-                getCommentByEntryId(entryId, token)
-                    .then(setComments)
-            })
-    }
-    
 
     return (
         <>
-        <section className="entry">
-            <h3 className="entry__title">{entry.title}</h3>
+        <Box className="entry">
+            <Typography className="entry__title">{entry.title}</Typography>
             <div className="entry__content">{entry.content}</div>
             <div className="entry__date">{entry.publication_date}</div>
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/entries/edit/${entryId}`)
             }}>Edit</Button>
-            <Button className="btn btn-primary" onClick={handleDelete}>Delete</Button>
-        </section>
-        <section className="categories">
-            <h3>Current Categories</h3>
+            <Button className="btn btn-primary" onClick={handleDeleteEntry}>Delete</Button>
+        </Box>
+        <Box className="categories">
+            <Typography>Current Categories</Typography>
             {
                 entryCategories.map(category => {
-                    return <>
-                    <div className="category" key={category.id}>
-                        <div className="category__label">{category.label}</div>
-                    </div>
-                    <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
-                    </>
+                    return (
+                    <div key={category.id}>
+                        <div className="category" key={category.id}>
+                            <div className="category__label">{category.label}</div>
+                        <HighlightOffOutlinedIcon onClick={() => handleDeleteCategory(category.id)} />
+                        </div>
+                    </div>)
                 })
             }
-        </section>
-        <section className="comments">
-            <h3>Comments</h3>
+        </Box>
+        <Box className="comments">
+            <Typography>Comments</Typography>
             {
                 comments.map(comment => {
                     return <div className="comment" key={comment.id}>
                         <div className="comment__author">{comment.author.user.username}</div>
-                        <div className="comment__title"><h3>{comment.title}</h3></div>
-                        <div className="comment__content">{comment.content}</div>
-                        <Button className="btn btn-primary" id={comment.id} onClick={handleDeleteComment}>Delete</Button>
+                        <div className="comment__title"><Typography>{comment.title}</Typography></div>
+                        <div className="comment__content"><Typography>{comment.content}</Typography></div>
+                        <Button className="btn btn-primary" onClick={() => handleDeleteComment(comment.id)}>Delete</Button>
                     </div>
                 })
             }
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/comments/create/${entryId}`)
             }}>Add Comment</Button>
-        </section>
-        <section className="categories">
-            <h3>Categories</h3>
-            <select className="form-control" onChange={e => setSelectedCategory(e.target.value)}>
-                <option value="0">Select a category</option>
+        </Box>
+        <Box className="categories">
+            <Typography>Categories</Typography>
+            <FormControl sx={{m:1, minWidth: 120}} size="small">
+            <Select fullWidth value={selectedCategory} className="form-control" onChange={e => setSelectedCategory(e.target.value)}>
+                <InputLabel id="category-label">Select a Category</InputLabel>
                 {
                     categories.filter(category => 
                         !entryCategories.some(entryCategory => entryCategory.id === category.id)
                     ).map(category => {
-                        return <option key={category.id} value={category.id}>{category.label}</option>
+                        return <MenuItem key={category.id} value={category.id}>{category.label}</MenuItem>
                     })
                 }
-            </select>
-
+            </Select>
+            </FormControl>
             <Button className="btn btn-primary" onClick={handleAddCategory}>Update Category</Button>
-        </section>
+        </Box>
         <Dialog
-        open={deleteConfirmationModalOpen}
-        onClose={() => handleDeleteConfirmationModalClose(false)}
+        open={deleteEntryModal}
+        onClose={() => handleDeleteEntryModalClose(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         >
@@ -156,8 +158,8 @@ export const EntryDetails = ({ token }) => {
             </DialogContentText>
         </DialogContent>
         <DialogActions>
-            <Button onClick={() => handleDeleteConfirmationModalClose(false)}>Cancel</Button>
-            <Button onClick={() => handleDeleteConfirmationModalClose(true)} autoFocus>
+            <Button onClick={() => handleDeleteEntryModalClose(false)}>Cancel</Button>
+            <Button onClick={() => handleDeleteEntryModalClose(true)} autoFocus>
             Delete
             </Button>
         </DialogActions>

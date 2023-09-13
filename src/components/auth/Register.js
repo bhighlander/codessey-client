@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../api/authManager"
 import { FormControl } from "@mui/base"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Link, TextField } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, Link, TextField, Typography } from "@mui/material"
 
 export const Register = ({ setToken }) => {
     const firstName = useRef()
@@ -39,7 +39,7 @@ export const Register = ({ setToken }) => {
     }
 
     return (
-    <>
+    <Box>
     <Dialog className="passwordDialog" open={isDialogOpen}>
         <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -50,8 +50,8 @@ export const Register = ({ setToken }) => {
         <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
         </DialogActions>
     </Dialog>
-    <h1>Welcome to Codessey</h1>
-    <h2>Please register</h2>
+    <Typography>Welcome to Codessey</Typography>
+    <Typography>Please register</Typography>
     <form onSubmit={handleRegister}>
         <FormControl>
             <TextField
@@ -124,6 +124,6 @@ export const Register = ({ setToken }) => {
         <Button variant="contained" type='submit'>Register</Button>
     </form>
         <Link href="/login">Already registered? Login here.</Link>
-    </>
+    </Box>
     )
 }

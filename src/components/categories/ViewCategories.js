@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { addCategory, deleteCategory, getAllCategories } from "../../api/categoryManager"
 import { EditCategory } from "../forms/EditCategory"
-import { Button, TextField } from "@mui/material"
+import { Box, Button, TextField, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 export const CategoryList = ({ token }) => {
@@ -9,9 +9,9 @@ export const CategoryList = ({ token }) => {
     const [newCategory, setNewCategory] = useState({label: ""})
     const [editedCategory, setEditedCategory] = useState(null)
 
-    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
+    const handleDeleteCategory = (e, categoryId) => { // TODO add mui confirmation modal
         e.preventDefault()
-        deleteCategory(e.target.id, token)
+        deleteCategory(categoryId, token)
             .then(() => {
                 getCategories()
             })
@@ -47,12 +47,12 @@ export const CategoryList = ({ token }) => {
 
 
     return (
-        <>
-            <h2>Categories</h2>
+        <Box>
+            <Typography>Categories</Typography>
             <div className="categories">
                 {categories?.map((category) => {
-                    return <><h3 onClick={() => toggleEdit(category.id)}>{category.label}</h3>
-            <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
+                    return <div key={category.id}><Typography key={category.id} onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
+            <HighlightOffOutlinedIcon onClick={(e) => handleDeleteCategory(e, category.id)} />
             <div className="editCategory">
                 {editedCategory === category.id && (
                     <><EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
@@ -63,19 +63,18 @@ export const CategoryList = ({ token }) => {
                 )
                 }
             </div>
-            </>
+            </div>
                 })}
             </div>
             {/* add a category field */}
             <form className="form--category">
-                <h2 className="form--category__title">Add a Category</h2>
+                <Typography className="form--category__title">Add a Category</Typography>
                 <TextField
                     className="form-control"
                     id='label'
                     label="Label"
                     variant="outlined"
                     required
-                    autoFocus
                     value={newCategory.label}
                     onChange={(e) => {
                         const copy = {...newCategory}
@@ -85,6 +84,6 @@ export const CategoryList = ({ token }) => {
                 />
                 <Button variant="contained" onClick={handleAddCategory}>Save Category</Button>
             </form>
-        </>
+        </Box>
     )
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { EntryCard } from "./EntryCard"
 import { getUserEntries } from "../../api/entryManager"
 import { getAllCategories } from "../../api/categoryManager"
-import { MenuItem, Select } from "@mui/material"
+import { Box, FormControl, MenuItem, Select, Typography } from "@mui/material"
 
 export const EntriesList = ({ token }) => {
     const [entries, setEntries] = useState([])
@@ -20,20 +20,24 @@ export const EntriesList = ({ token }) => {
     }, [token, selectedCategory])
 
     return (
-        <>
-            <h2>Filter Entries</h2>
-            <Select fullWidth onChange={(e) => setSelectedCategory(e.target.value)}>
-                <MenuItem value={null}>All</MenuItem>
+        <Box className="all-entries" sx={{ display: "flex", flexDirection: "row"}}>
+            <Box className="entries-list" sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography>Entries</Typography>
+                {
+                    entries?.map(entry => <EntryCard key={entry.id} entry={entry} />)
+                }
+                </Box>
+            <Box className="filter-categories" sx={{ display: "flex", flexDirection: "column", justifyContent: "right", alignItems: "center" }}>
+            <Typography>Filter Entries</Typography>
+            <FormControl sx={{m: 1, minWidth: 120}} size="small">
+            <Select fullWidth value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                <MenuItem value={"All"}>All</MenuItem>
                 {
                     categories?.map(category => <MenuItem key={category.id} value={category.id}>{category.label}</MenuItem>)
                 }
             </Select>
-            <h1>Entries</h1>
-            <div className="entries">
-                {
-                    entries?.map(entry => <EntryCard key={entry.id} entry={entry} />)
-                }
-            </div>
-        </>
+            </FormControl>
+            </Box>
+        </Box>
     )
 }

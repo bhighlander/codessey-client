@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getSingleEntry, updateEntry } from "../../api/entryManager"
-import { Button, TextField } from "@mui/material"
+import { Box, Button, TextField, Typography } from "@mui/material"
 import { FormControl } from "@mui/base"
 
 export const EditEntry = ({ token }) => {
     const { entryId } = useParams()
     const navigate = useNavigate()
-    const [entry, setEntry] = useState({})
+    const [entry, setEntry] = useState({title: "", content: ""})
 
     const handleUpdate = (e) => {
         e.preventDefault()
@@ -25,8 +25,9 @@ export const EditEntry = ({ token }) => {
     , [entryId, token])
 
     return (
+    <Box>
         <form className="entryForm" onSubmit={handleUpdate}>
-            <h2 className="entryForm__title">Edit Entry</h2>
+            <Typography className="entryForm__title">Edit Entry</Typography>
             <FormControl>
             <TextField
                 className="form-control"
@@ -51,7 +52,8 @@ export const EditEntry = ({ token }) => {
                 label="Content"
                 variant="outlined"
                 multiline
-                rows={4}
+                rows={6}
+                maxRows={6}
                 required
                 autoFocus
                 InputLabelProps={{ shrink: true }}
@@ -65,5 +67,6 @@ export const EditEntry = ({ token }) => {
             </FormControl>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
         </form>
+    </Box>
     )
 }

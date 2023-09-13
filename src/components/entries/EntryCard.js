@@ -1,16 +1,42 @@
+import { Box, Card, CardContent, List, ListItem, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 
 export const EntryCard = ({ entry }) => {
 
 
     return (
-        <section className="entry">
-            <Link href={`/entries/${entry.id}`}>
-            <h3 className="entry__title">{entry.title}</h3>
+        <Box>
+        <Card sx={{ display: 'inline-flex', width: 500, height: 100, margin: 1 }}>
+            <CardContent sx={{ width: 200 }}>
+            <Link href={`/entries/${entry.id}`} underline='hover'>
+                <Typography>{entry.title}</Typography>
             </Link>
-            <div className="entry__content">{entry.content}</div>
+            <Typography>{entry.content}</Typography>
+            <Typography>{entry.publication_date}</Typography>
+            </CardContent>
+            <CardContent>
+            <Typography>Categories</Typography>
+                {entry.categories?.length > 0 ? (
+                    <List sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        listStyleType: 'none',
+                        padding: 0,
+                        overflow: 'auto',
+                        justifyContent: 'right'
+                    }}>
+                        {entry.categories.map(category => (
+                            <ListItem key={category.id} style={{ marginRight: '5px' }} disablePadding>
+                                {category.label}
+                            </ListItem>
+                        ))}
+                    </List>
+                ) : (
+                    <Typography>None</Typography>
+                )}
 
-
-        </section>
+            </CardContent>
+        </Card>
+        </Box>
     )
 }
