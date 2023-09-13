@@ -25,7 +25,7 @@ export const Login = ({ setToken }) => {
                 if ("valid" in res && res.valid && "token" in res) {
                     setToken(res.token)
                     setIsUnsuccessful(false)
-                    navigate("/")
+                    navigate("/entries")
                 }
                 else {
                     setIsUnsuccessful(true)

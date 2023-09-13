@@ -107,9 +107,11 @@ export const EntryDetails = ({ token }) => {
                 comments?.map(comment => <CommentCard key={comment.id} comment={comment} token={token} getComments={() => getCommentByEntryId(entryId, token).then(setComments)} />)
             }
         </Box>
+
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/comments/create/${entryId}`)
             }}>Add Comment</Button>
+
         <Box className="categories">
             <Typography>Categories</Typography>
             <FormControl sx={{m:1, minWidth: 120}} size="small">
