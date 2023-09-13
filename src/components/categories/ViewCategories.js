@@ -9,9 +9,9 @@ export const CategoryList = ({ token }) => {
     const [newCategory, setNewCategory] = useState({label: ""})
     const [editedCategory, setEditedCategory] = useState(null)
 
-    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
+    const handleDeleteCategory = (e, categoryId) => { // TODO add mui confirmation modal
         e.preventDefault()
-        deleteCategory(e.target.id, token)
+        deleteCategory(categoryId, token)
             .then(() => {
                 getCategories()
             })
@@ -51,8 +51,8 @@ export const CategoryList = ({ token }) => {
             <Typography>Categories</Typography>
             <div className="categories">
                 {categories?.map((category) => {
-                    return <><Typography key={category.id} onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
-            <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
+                    return <div key={category.id}><Typography key={category.id} onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
+            <HighlightOffOutlinedIcon onClick={(e) => handleDeleteCategory(e, category.id)} />
             <div className="editCategory">
                 {editedCategory === category.id && (
                     <><EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
@@ -63,7 +63,7 @@ export const CategoryList = ({ token }) => {
                 )
                 }
             </div>
-            </>
+            </div>
                 })}
             </div>
             {/* add a category field */}

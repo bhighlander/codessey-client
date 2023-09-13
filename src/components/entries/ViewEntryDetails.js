@@ -119,7 +119,7 @@ export const EntryDetails = ({ token }) => {
                         <div className="comment__author">{comment.author.user.username}</div>
                         <div className="comment__title"><Typography>{comment.title}</Typography></div>
                         <div className="comment__content"><Typography>{comment.content}</Typography></div>
-                        <Button className="btn btn-primary" id={comment.id} onClick={handleDeleteComment}>Delete</Button>
+                        <Button className="btn btn-primary" onClick={() => handleDeleteComment(comment.id)}>Delete</Button>
                     </div>
                 })
             }
