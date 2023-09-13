@@ -15,27 +15,46 @@ export const EntryDetails = ({ token }) => {
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState([])
     const [entryCategories, setEntryCategories] = useState([])
-    const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false)
+    const [deleteEntryModal, setDeleteEntryModal] = useState(false)
+    const [deleteCommentModal, setDeleteCommentModal] = useState(false)
+    const [deleteCategoryModal, setDeleteCategoryModal] = useState(false)
 
-    const handleDeleteConfirmationModalOpen = () => {
-        setDeleteConfirmationModalOpen(true)
+    const handleDeleteEntry = () => {
+        handleDeleteEntryModal()
     }
 
-    const handleDelete = () => {
-        handleDeleteConfirmationModalOpen()
-
+    const handleDeleteEntryModal = () => {
+        setDeleteEntryModal(true)
     }
 
-    const handleDeleteConfirmationModalClose = (shouldDelete) => {
+    const handleDeleteEntryModalClose = (shouldDelete) => {
         if (shouldDelete) {
             deleteEntry(entryId, token)
                 .then(() => {
                     navigate("/entries")
                 })
         }
-        setDeleteConfirmationModalOpen(false)
+        setDeleteEntryModal(false)
     }
 
+    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
+        e.preventDefault()
+        removeEntryCategory(entryId, e.target.id, token)
+            .then(() => {
+                getCategoriesByEntryId(entryId, token)
+                    .then(setEntryCategories)
+            })
+    }
+
+    const handleDeleteComment = (e) => { // TODO add mui confirmation modal
+        e.preventDefault()
+        deleteComment(e.target.id, token)
+            .then(() => {
+                getCommentByEntryId(entryId, token)
+                    .then(setComments)
+            })
+    }
+    
 
     useEffect(() => {
         getSingleEntry(entryId, token)
@@ -67,24 +86,6 @@ export const EntryDetails = ({ token }) => {
             })
     };
 
-    const handleDeleteCategory = (e) => { // TODO add mui confirmation modal
-        e.preventDefault()
-        removeEntryCategory(entryId, e.target.id, token)
-            .then(() => {
-                getCategoriesByEntryId(entryId, token)
-                    .then(setEntryCategories)
-            })
-    }
-
-    const handleDeleteComment = (e) => { // TODO add mui confirmation modal
-        e.preventDefault()
-        deleteComment(e.target.id, token)
-            .then(() => {
-                getCommentByEntryId(entryId, token)
-                    .then(setComments)
-            })
-    }
-    
 
     return (
         <>
@@ -95,7 +96,7 @@ export const EntryDetails = ({ token }) => {
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/entries/edit/${entryId}`)
             }}>Edit</Button>
-            <Button className="btn btn-primary" onClick={handleDelete}>Delete</Button>
+            <Button className="btn btn-primary" onClick={handleDeleteEntry}>Delete</Button>
         </section>
         <section className="categories">
             <h3>Current Categories</h3>
@@ -142,8 +143,8 @@ export const EntryDetails = ({ token }) => {
             <Button className="btn btn-primary" onClick={handleAddCategory}>Update Category</Button>
         </section>
         <Dialog
-        open={deleteConfirmationModalOpen}
-        onClose={() => handleDeleteConfirmationModalClose(false)}
+        open={deleteEntryModal}
+        onClose={() => handleDeleteEntryModalClose(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         >
@@ -156,8 +157,8 @@ export const EntryDetails = ({ token }) => {
             </DialogContentText>
         </DialogContent>
         <DialogActions>
-            <Button onClick={() => handleDeleteConfirmationModalClose(false)}>Cancel</Button>
-            <Button onClick={() => handleDeleteConfirmationModalClose(true)} autoFocus>
+            <Button onClick={() => handleDeleteEntryModalClose(false)}>Cancel</Button>
+            <Button onClick={() => handleDeleteEntryModalClose(true)} autoFocus>
             Delete
             </Button>
         </DialogActions>

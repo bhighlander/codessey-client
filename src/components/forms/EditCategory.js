@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { updateCategory } from "../../api/categoryManager"
-import { Button } from "@mui/material"
+import { Button, FormControl, TextField } from "@mui/material"
 
 export const EditCategory = ({ token, category, getCategories, onSave }) => {
     const [editedCategory, setEditedCategory] = useState({id: category.id, label: category.label})
@@ -18,25 +18,23 @@ export const EditCategory = ({ token, category, getCategories, onSave }) => {
         <>
             <h2>Edit Category</h2>
             <form className="form--category">
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="label">Label:</label>
-                        <input
-                        type="text"
-                        id="label" 
-                        name="label" 
-                        required 
-                        autoFocus 
-                        className="form-control" 
-                        value={editedCategory.label}
-                        onChange={(e) => {
-                            const copy = {...editedCategory}
-                            copy.label = e.target.value
-                            setEditedCategory(copy)
-                        }}
-                        />
-                    </div>
-                </fieldset>
+            <FormControl>
+                <TextField
+                    className="form-control"
+                    id='label'
+                    label="Label"
+                    variant="outlined"
+                    required
+                    autoFocus
+                    InputLabelProps={{ shrink: true }}
+                    value={editedCategory.label}
+                    onChange={(e) => {
+                        const copy = { ...editedCategory }
+                        copy.label = e.target.value
+                        setEditedCategory(copy)
+                    }}
+                />
+            </FormControl>
                 <Button variant="contained" className="btn btn-primary" onClick={handleEditCategory}>Save</Button>
             </form>
         </>

@@ -51,7 +51,7 @@ export const CategoryList = ({ token }) => {
             <h2>Categories</h2>
             <div className="categories">
                 {categories?.map((category) => {
-                    return <><h3 onClick={() => toggleEdit(category.id)}>{category.label}</h3>
+                    return <><h3 key={category.id} onClick={() => toggleEdit(category.id)}>{category.label}</h3>
             <HighlightOffOutlinedIcon id={category.id} onClick={handleDeleteCategory} />
             <div className="editCategory">
                 {editedCategory === category.id && (
@@ -75,7 +75,6 @@ export const CategoryList = ({ token }) => {
                     label="Label"
                     variant="outlined"
                     required
-                    autoFocus
                     value={newCategory.label}
                     onChange={(e) => {
                         const copy = {...newCategory}
