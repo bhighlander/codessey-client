@@ -4,7 +4,7 @@ import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory, tog
 import { getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, Typography } from "@mui/material"
+import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, FormGroup, IconButton, InputLabel, MenuItem, Select, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 import { CommentCard } from "../comments/CommentCard"
 import Grid from '@mui/material/Grid'
@@ -132,24 +132,31 @@ export const EntryDetails = ({ token }) => {
             <Grid item xs={12} md={4} style={{ maxWidth: '30%' }}>
                 <Box className="categories-column">
                     <Typography>Current Categories</Typography>
-                    <Box className="current-categories">
+                    <br />
+                    <Grid className="current-categories">
                     <Grid container spacing={2} direction="row">
-                    {
-                        entryCategories.map(category => {
-                        return (
-                            <Grid item key={category.id}>
-                            <Box>
-                                <div className="category">
-                                <div className="category__label">{category.label}</div>
-                                <HighlightOffOutlinedIcon onClick={() => handleDeleteCategory(category.id)} />
-                                </div>
-                            </Box>
-                            </Grid>)
-                        })
-                    }
+                        {entryCategories.length > 0 ? (
+                            entryCategories.map(category => {
+                                return (
+                                    <Grid item key={category.id}>
+                                        <Box>
+                                            <div className="category">
+                                                <div className="category__label">{category.label}</div>
+                                                <IconButton aria-label="Remove Category" onClick={() => handleDeleteCategory(category.id)}>
+                                                <HighlightOffOutlinedIcon />
+                                                </IconButton>
+                                            </div>
+                                        </Box>
+                                    </Grid>
+                                )
+                            })
+                        ) : (
+                            <Typography>None</Typography>
+                        )}
                     </Grid>
 
-                    </Box>
+
+                    </Grid>
                 <Grid item>
                 <Box className="update-categories">
                     <Typography>Categories</Typography>
@@ -166,8 +173,8 @@ export const EntryDetails = ({ token }) => {
                             }
                         </Select>
                     </FormControl>
-
-                    <Button className="btn btn-primary" onClick={handleAddCategory}>Update Category</Button>
+                            <br />
+                    <Button className="btn btn-primary" onClick={handleAddCategory}>Add Category</Button>
                 </Box>
                 </Grid>
                 <Dialog

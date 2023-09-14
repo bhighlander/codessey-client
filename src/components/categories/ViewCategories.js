@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { addCategory, deleteCategory, getAllCategories } from "../../api/categoryManager"
 import { EditCategory } from "../forms/EditCategory"
-import { Box, Button, Grid, TextField, Typography } from "@mui/material"
+import { Box, Button, Grid, IconButton, TextField, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 export const CategoryList = ({ token }) => {
@@ -45,28 +45,34 @@ export const CategoryList = ({ token }) => {
         }
     }
 
-return (
-    <Box sx={{ margin: 2 }}>
-        <Typography>Categories</Typography>
-        <Grid container spacing={3} sx={{ margin: .5 }}>
-            {categories?.map((category) => (
-                <Grid item key={category.id} xs={2}>
-                    <Typography onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
-                    <HighlightOffOutlinedIcon onClick={(e) => handleDeleteCategory(e, category.id)} />
-                    <div className="editCategory">
-                        {editedCategory === category.id && (
-                            <>
-                                <EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
-                                <div>
-                                    <Button onClick={() => setEditedCategory(null)}>Cancel</Button>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </Grid>
-            ))}
-        </Grid>
-        <form className="form--category">
+    return (
+        <Box sx={{ margin: 2 }}>
+            <Typography>Categories</Typography>
+            <Grid container spacing={3} sx={{ margin: .5 }}>
+                {categories?.length > 0 ? (
+                    categories.map((category) => (
+                        <Grid item key={category.id} xs={2}>
+                            <Typography onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
+                            <IconButton aria-label="Delete" onClick={(e) => handleDeleteCategory(e, category.id)}>
+                            <HighlightOffOutlinedIcon />
+                            </IconButton>
+                            <div className="editCategory">
+                                {editedCategory === category.id && (
+                                    <>
+                                        <EditCategory token={token} getCategories={getCategories} category={category} onSave={() => setEditedCategory(null)} />
+                                        <div>
+                                            <Button onClick={() => setEditedCategory(null)}>Cancel</Button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </Grid>
+                    ))
+                ) : (
+                    <Typography>No Categories. Please Add One.</Typography>
+                )}
+            </Grid>
+            <form className="form--category">
             <Typography className="form--category__title">Add a Category</Typography>
             <TextField
                 className="form-control"
