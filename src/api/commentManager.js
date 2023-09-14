@@ -28,3 +28,14 @@ export const deleteComment = async (commentId, token) => {
         }
     });
 }
+
+export const updateComment = async (comment, token) => {
+    await fetch(`http://localhost:8000/comments/${comment.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(comment)
+    });
+}
