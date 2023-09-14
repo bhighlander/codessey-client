@@ -35,7 +35,6 @@ export const EditEntry = ({ token }) => {
                 label="Title"
                 variant="outlined"
                 required
-                autoFocus
                 InputLabelProps={{ shrink: true }}
                 value={entry.title}
                 onChange={(e) => {
@@ -55,7 +54,6 @@ export const EditEntry = ({ token }) => {
                 rows={6}
                 maxRows={6}
                 required
-                autoFocus
                 InputLabelProps={{ shrink: true }}
                 value={entry.content}
                 onChange={(e) => {

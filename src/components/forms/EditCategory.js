@@ -25,7 +25,6 @@ export const EditCategory = ({ token, category, getCategories, onSave }) => {
                     label="Label"
                     variant="outlined"
                     required
-                    autoFocus
                     InputLabelProps={{ shrink: true }}
                     value={editedCategory.label}
                     onChange={(e) => {
