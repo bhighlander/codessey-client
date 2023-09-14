@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory } from "../../api/entryManager"
+import { addEntryCategory, deleteEntry, getSingleEntry, removeEntryCategory, toggleEntrySolved } from "../../api/entryManager"
 import { deleteComment, getCommentByEntryId } from "../../api/commentManager"
 import { useNavigate } from "react-router-dom"
 import { getAllCategories, getCategoriesByEntryId } from "../../api/categoryManager"
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material"
+import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, Typography } from "@mui/material"
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 import { CommentCard } from "../comments/CommentCard"
 
@@ -74,13 +74,25 @@ export const EntryDetails = ({ token }) => {
             })
     };
 
+    const handleToggleSolved = () => {
+        toggleEntrySolved(entryId, entry.solved, token)
+            .then(() => {
+                getSingleEntry(entryId, token)
+                    .then(setEntry)
+            })
+    }
+
 
     return (
         <>
         <Box className="entry">
             <Typography className="entry__title">{entry.title}</Typography>
-            <div className="entry__content">{entry.content}</div>
-            <div className="entry__date">{entry.publication_date}</div>
+                <Typography>Solved: {entry.solved ? "Yes" : "No"}</Typography>
+            <FormGroup className="entry__approved">
+                <FormControlLabel control={<Checkbox checked={entry.approved} />} label="Solved" onChange={handleToggleSolved} />
+            </FormGroup>
+            <Typography className="entry__content">{entry.content}</Typography>
+            <Typography className="entry__date">{entry.publication_date}</Typography>
             <Button className="btn btn-primary" onClick={() => {
                 navigate(`/entries/edit/${entryId}`)
             }}>Edit</Button>
