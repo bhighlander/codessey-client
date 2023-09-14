@@ -87,3 +87,14 @@ export const updateEntry = async (entry, token) => {
         body: JSON.stringify(entry)
     });
 }
+
+export const toggleEntrySolved = async (entryId, currentStatus, token) => {
+    await fetch(`http://localhost:8000/entries/${entryId}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ solved: !currentStatus })
+    });
+}
