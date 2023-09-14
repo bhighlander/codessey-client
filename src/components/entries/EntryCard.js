@@ -6,12 +6,12 @@ export const EntryCard = ({ entry }) => {
 
     return (
         <Box>
-        <Card sx={{ display: 'inline-flex', width: 500, height: 100, margin: 1 }}>
+        <Card sx={{ display: 'inline-flex', width: 500, margin: 1 }}>
             <CardContent sx={{ width: 200 }}>
             <Link href={`/entries/${entry.id}`} underline='hover'>
                 <Typography>{entry.title}</Typography>
             </Link>
-            <Typography>{entry.content}</Typography>
+            <Typography style={{ whiteSpace: "pre-wrap" }}>{entry.content}</Typography>
             <Typography>{entry.publication_date}</Typography>
             </CardContent>
             <CardContent>

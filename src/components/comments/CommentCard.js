@@ -29,7 +29,8 @@ export const CommentCard = ({ comment, token, getComments }) => {
             <Card>
                 <CardContent>
                     <Typography>{comment.title}</Typography>
-                    <Typography>{comment.content}</Typography>
+                    <Typography style={{ whiteSpace: "pre-wrap" }}>{comment.content}</Typography>
+
                     <Typography>{comment.publication_date}</Typography>
                 </CardContent>
                 <Box>
