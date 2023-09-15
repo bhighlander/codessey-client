@@ -3,7 +3,7 @@ import FormControl from '@mui/material/FormControl';
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { loginUser } from "../../api/authManager"
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 
 export const Login = ({ setToken }) => {
@@ -34,40 +34,60 @@ export const Login = ({ setToken }) => {
     }
 
     return (
-        <Box>
-        <Typography>Codessey</Typography>
-        <Typography>Please sign in</Typography>
-        <form onSubmit={handleLogin}>
-        <FormControl>
-        <TextField
-        className="form-control"
-        id='username'
-        label="Username"
-        variant="outlined"
-        required
-        ref={username}
-        onChange={(e) => {username.current.value = e.target.value}}
-        />
-        </FormControl>
-        <FormControl>
-        <TextField
-        className="form-control"
-        id='password'
-        label="Password"
-        variant="outlined"
-        type='password'
-        required
-        ref={password}
-        onChange={(e) => {password.current.value = e.target.value}}
-        />
-        </FormControl>
-        <Button variant="contained" type='submit'>Login</Button>
-        </form>
-        <Link href="/register">Not a member yet?</Link>
-        {
-            isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
-        }
-</Box>
+        <Container alignItems='center'>
+            <Grid container spacing={2}
+            sx={{ height: 500 }}
+            direction={'column'}
+            alignItems={'center'}
+            justifyContent={'center'}
+            >
+            <Grid item>
+            <Typography align='center'>Welcome to Codessey</Typography>
+            <Typography align='center'>Please sign in</Typography>
+            </Grid>
+            <Grid item style={{ width: '30%' }}>
+            <form onSubmit={handleLogin}>
+                <Grid container spacing={2} sx={{ margin: .5 }} direction={'column'}>
+                <Grid item>
+                <FormControl>
+                    <TextField
+                    className="form-control"
+                    id='username'
+                    label="Username"
+                    variant="outlined"
+                    required
+                    ref={username}
+                    onChange={(e) => {username.current.value = e.target.value}}
+                    />
+                </FormControl>
+                </Grid>
+                <Grid item>
+                <FormControl>
+                    <TextField
+                    className="form-control"
+                    id='password'
+                    label="Password"
+                    variant="outlined"
+                    type='password'
+                    required
+                    ref={password}
+                    onChange={(e) => {password.current.value = e.target.value}}
+                    />
+                </FormControl>
+                </Grid>
+                <Grid item>
+                    <Button variant="contained" type='submit'>Login</Button>
+                    </Grid>
+                </Grid>
+                </form>
+                </Grid>
+                <br />
+                <Link href="/register">Not a member yet?</Link>
+            {
+                isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
+            }
+            </Grid>
+        </Container>
 
     )
 }

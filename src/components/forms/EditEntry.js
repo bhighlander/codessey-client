@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getSingleEntry, updateEntry } from "../../api/entryManager"
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material"
 import { FormControl } from "@mui/base"
 
 export const EditEntry = ({ token }) => {
@@ -25,9 +25,18 @@ export const EditEntry = ({ token }) => {
     , [entryId, token])
 
     return (
-    <Box>
+    <Container>
+            <Grid container
+            spacing={2}
+            sx={{ margin: .5 }}
+            direction={'column'}
+            justifyContent={"center"}
+        >
         <form className="entryForm" onSubmit={handleUpdate}>
+            <Grid item>
             <Typography className="entryForm__title">Edit Entry</Typography>
+            </Grid>
+            <Grid item>
             <FormControl>
             <TextField
                 className="form-control"
@@ -44,6 +53,8 @@ export const EditEntry = ({ token }) => {
                 }}
             />
             </FormControl>
+            </Grid>
+            <Grid item>
             <FormControl>
             <TextField
                 className="form-control"
@@ -63,8 +74,12 @@ export const EditEntry = ({ token }) => {
                 }}
             />
             </FormControl>
+            </Grid>
+            <Grid item>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
+            </Grid>
         </form>
-    </Box>
+        </Grid>
+    </Container>
     )
 }

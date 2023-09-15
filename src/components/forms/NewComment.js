@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { createComment } from "../../api/commentManager"
 import { FormControl } from "@mui/base"
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Button, Container, Grid, TextField, Typography } from "@mui/material"
 
 export const CreateComment = ({ token }) => {
     const { entryId } = useParams()
@@ -23,9 +23,18 @@ export const CreateComment = ({ token }) => {
     }
 
     return (
-    <Box>
+    <Container>
+        <Grid container
+            spacing={2}
+            sx={{ margin: .5 }}
+            direction={'column'}
+            justifyContent={"center"}
+        >
         <form className="commentForm" onSubmit={handleSubmitComment}>
+            <Grid item>
             <Typography className="commentForm__title">New Comment</Typography>
+            </Grid>
+            <Grid item>
             <FormControl>
                 <TextField
                     className="form-control"
@@ -41,6 +50,8 @@ export const CreateComment = ({ token }) => {
                     }}
                 />
             </FormControl>
+            </Grid>
+            <Grid item>
             <FormControl>
                 <TextField
                     className="form-control"
@@ -58,8 +69,12 @@ export const CreateComment = ({ token }) => {
                     }}
                 />
             </FormControl>
+            </Grid>
+            <Grid item>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
+            </Grid>
         </form>
-    </Box>
+        </Grid>
+    </Container>
     )
 }
