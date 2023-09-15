@@ -9,13 +9,13 @@ export const EntryCard = ({ entry }) => {
         <Card sx={{ display: 'inline-flex', width: 500, margin: 1 }}>
             <CardContent sx={{ width: 200 }}>
             <Link href={`/entries/${entry.id}`} underline='hover'>
-                <Typography>{entry.title}</Typography>
+                <Typography variant='h6'>{entry.title}</Typography>
             </Link>
-            <Typography style={{ whiteSpace: "pre-wrap" }}>{entry.content}</Typography>
-            <Typography>{entry.publication_date}</Typography>
+            <Typography variant='body1' style={{ whiteSpace: "pre-wrap" }}>{entry.content}</Typography>
+            <Typography variant='caption'>{entry.publication_date}</Typography>
             </CardContent>
             <CardContent>
-            <Typography>Categories</Typography>
+            <Typography variant='h6'>Categories</Typography>
                 {entry.categories?.length > 0 ? (
                     <List sx={{
                         display: 'flex',
@@ -32,7 +32,7 @@ export const EntryCard = ({ entry }) => {
                         ))}
                     </List>
                 ) : (
-                    <Typography>None</Typography>
+                    <Typography variant='button'>None</Typography>
                 )}
 
             </CardContent>

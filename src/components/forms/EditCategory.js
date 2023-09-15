@@ -16,7 +16,7 @@ export const EditCategory = ({ token, category, getCategories, onSave }) => {
 
     return (
         <Box>
-            <Typography>Edit Category</Typography>
+            <Typography variant="h6">Edit Category</Typography>
             <form className="form--category">
             <FormControl>
                 <TextField

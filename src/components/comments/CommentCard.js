@@ -27,13 +27,13 @@ export const CommentCard = ({ comment, token, getComments }) => {
 
     return (
         <div>
-        <Box>
+        <Box sx={{ minWidth: 450 }}>
             <Card>
                 <CardContent>
-                    <Typography>{comment.title}</Typography>
-                    <Typography style={{ whiteSpace: "pre-wrap" }}>{comment.content}</Typography>
+                    <Typography variant="h6">{comment.title}</Typography>
+                    <Typography variant="body1" style={{ whiteSpace: "pre-wrap" }}>{comment.content}</Typography>
 
-                    <Typography>{comment.publication_date}</Typography>
+                    <Typography variant="caption">{comment.publication_date}</Typography>
                 </CardContent>
                 <Box>
                     <Stack direction="row" spacing={2}>

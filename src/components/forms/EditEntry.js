@@ -34,7 +34,7 @@ export const EditEntry = ({ token }) => {
         >
         <form className="entryForm" onSubmit={handleUpdate}>
             <Grid item>
-            <Typography className="entryForm__title">Edit Entry</Typography>
+            <Typography variant="h6" className="entryForm__title">Edit Entry</Typography>
             </Grid>
             <Grid item>
             <FormControl>
@@ -75,8 +75,13 @@ export const EditEntry = ({ token }) => {
             />
             </FormControl>
             </Grid>
+            <Grid container spacing={2}>
             <Grid item>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
+            </Grid>
+            <Grid item>
+                <Button variant="contained" onClick={() => {navigate(`/entries/${entryId}`)}}>Cancel</Button>
+            </Grid>
             </Grid>
         </form>
         </Grid>

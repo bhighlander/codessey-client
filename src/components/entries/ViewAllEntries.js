@@ -23,7 +23,7 @@ export const EntriesList = ({ token }) => {
         <Grid container spacing={8} sx={{ margin: .5 }}>
             <Grid item style={{ width: '50%' }}>
                 <Box className="entries-list" fullWidth>
-                    <Typography>Entries</Typography>
+                    <Typography variant="h5">Entries</Typography>
                     {
                         entries?.map(entry => <EntryCard key={entry.id} entry={entry} />)
                     }
@@ -31,7 +31,7 @@ export const EntriesList = ({ token }) => {
             </Grid>
             <Grid item style={{ width: '30%' }}>
                 <Box className="filter-categories">
-                    <Typography>Filter Entries</Typography>
+                    <Typography variant="h5">Filter Entries</Typography>
                     <FormControl sx={{m: 1, minWidth: 120}} size="small">
                         <Select fullWidth value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                             <MenuItem value={"All"}>All</MenuItem>

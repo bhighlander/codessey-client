@@ -47,12 +47,13 @@ export const CategoryList = ({ token }) => {
 
     return (
         <Box sx={{ margin: 2 }}>
-            <Typography>Categories</Typography>
+            <Typography variant="h5">Categories</Typography>
             <Grid container spacing={3} sx={{ margin: .5 }}>
                 {categories?.length > 0 ? (
                     categories.map((category) => (
                         <Grid item key={category.id} xs={2}>
-                            <Typography onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
+                            <Typography variant="button" onClick={() => toggleEdit(category.id)}>{category.label}</Typography>
+                            <br />
                             <IconButton aria-label="Delete" onClick={(e) => handleDeleteCategory(e, category.id)}>
                             <HighlightOffOutlinedIcon />
                             </IconButton>
@@ -69,7 +70,7 @@ export const CategoryList = ({ token }) => {
                         </Grid>
                     ))
                 ) : (
-                    <Typography>No Categories. Please Add One.</Typography>
+                    <Typography variant="button">No Categories. Please Add One.</Typography>
                 )}
             </Grid>
             <form className="form--category">

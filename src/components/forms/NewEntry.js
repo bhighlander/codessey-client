@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
 import { createEntry } from "../../api/entryManager"
 import { useState } from "react"
-import { Box, Container, Grid, TextField, Typography } from "@mui/material"
+import { Container, Grid, TextField, Typography } from "@mui/material"
 import { FormControl } from "@mui/base"
 import { Button } from "@mui/material"
 
@@ -31,7 +31,7 @@ export const CreateEntry = ({ token }) => {
         >
         <form className="entryForm" onSubmit={handleSubmitPost}>
             <Grid item>
-            <Typography className="entryForm__title">New Entry</Typography>
+            <Typography variant="h6" className="entryForm__title">New Entry</Typography>
             </Grid>
             <Grid item>
             <FormControl>
@@ -70,8 +70,13 @@ export const CreateEntry = ({ token }) => {
             />
             </FormControl>
             </Grid>
+            <Grid container spacing={2}>
             <Grid item>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
+            </Grid>
+            <Grid item>
+            <Button variant="contained" className="btn btn-primary" onClick={() => navigate("/entries")}>Cancel</Button>
+            </Grid>
             </Grid>
         </form>
         </Grid>

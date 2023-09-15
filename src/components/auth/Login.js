@@ -42,8 +42,8 @@ export const Login = ({ setToken }) => {
             justifyContent={'center'}
             >
             <Grid item>
-            <Typography align='center'>Welcome to Codessey</Typography>
-            <Typography align='center'>Please sign in</Typography>
+            <Typography variant='h4' align='center'>Welcome to Codessey</Typography>
+            <Typography variant='subtitle1' align='center'>Please sign in</Typography>
             </Grid>
             <Grid item style={{ width: '30%' }}>
             <form onSubmit={handleLogin}>

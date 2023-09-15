@@ -33,7 +33,7 @@ export const EditComment = ({ token }) => {
         >
             <form className="commentForm" onSubmit={handleUpdateComment}>
                 <Grid item>
-                <Typography className="commentForm__title">Edit Comment</Typography>
+                <Typography variant="h5" className="commentForm__title">Edit Comment</Typography>
                 </Grid>
                 <Grid item>
                 <FormControl>
@@ -74,8 +74,13 @@ export const EditComment = ({ token }) => {
                     />
                 </FormControl>
                 </Grid>
+                <Grid container spacing={2}>
                 <Grid item>
                 <Button type="submit" variant="contained">Update Comment</Button>
+                </Grid>
+                <Grid item>
+                <Button variant="contained" onClick={() => {navigate(`/entries/${comment.entry.id}`)}}>Cancel</Button>
+                </Grid>
                 </Grid>
             </form>
             </Grid>
