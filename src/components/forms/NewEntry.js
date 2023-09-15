@@ -41,6 +41,7 @@ export const CreateEntry = ({ token }) => {
                 label="Title"
                 variant="outlined"
                 margin="normal"
+                color="primary"
                 required
                 onChange={(e) => {
                     const copy = { ...newPost }
