@@ -12,8 +12,10 @@ export const Codessey = () => {
 
     return (
         <>
+
         <NavBar token={token} setToken={setNewToken} />
         <ApplicationViews token={token} setToken={setNewToken} />
+
         </>
     )
 }
