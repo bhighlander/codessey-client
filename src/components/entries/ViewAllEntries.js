@@ -22,7 +22,7 @@ export const EntriesList = ({ token }) => {
     return (
         <Grid container spacing={8} sx={{ margin: .5 }}>
             <Grid item style={{ width: '50%' }}>
-                <Box className="entries-list" fullWidth>
+                <Box className="entries-list">
                     <Typography variant="h5">Entries</Typography>
                     {
                         entries?.map(entry => <EntryCard key={entry.id} entry={entry} />)
