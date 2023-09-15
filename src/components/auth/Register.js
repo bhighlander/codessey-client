@@ -59,8 +59,8 @@ export const Register = ({ setToken }) => {
                 justifyContent={"center"}
             >
                 <Grid item>
-                    <Typography align="center">Welcome to Codessey</Typography>
-                    <Typography align="center">Please register</Typography>
+                    <Typography variant="h4" align="center">Welcome to Codessey</Typography>
+                    <Typography variant="subtitle1" align="center">Please register</Typography>
                 </Grid>
     
                 <Grid item style={{ width: '50%'}}>
