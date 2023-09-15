@@ -7,6 +7,7 @@ import { EntryDetails } from "../components/entries/ViewEntryDetails"
 import { CategoryList } from "../components/categories/ViewCategories"
 import { CreateComment } from "../components/forms/NewComment"
 import { EditEntry } from "../components/forms/EditEntry"
+import { EditComment } from "../components/forms/EditComment"
 
 export const ApplicationViews = ({ token, setToken }) => {
 
@@ -28,6 +29,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         </Route>
         <Route path="/comments">
             <Route path="create/:entryId" element={<CreateComment token={token} />} />
+            <Route path="edit/:commentId" element={<EditComment token={token} />} />
         </Route>
     </Routes>
     </>

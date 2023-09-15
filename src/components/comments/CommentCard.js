@@ -1,8 +1,10 @@
 import { Box, Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Stack, Typography } from "@mui/material"
 import { deleteComment } from "../../api/commentManager"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const CommentCard = ({ comment, token, getComments }) => {
+    const navigate = useNavigate()
     const [deleteCommentModal, setDeleteCommentModal] = useState(false)
 
     const handleDeleteComment = () => {
@@ -35,7 +37,7 @@ export const CommentCard = ({ comment, token, getComments }) => {
                 </CardContent>
                 <Box>
                     <Stack direction="row" spacing={2}>
-                    <Button>Edit</Button>
+                    <Button onClick={() => navigate(`/comments/edit/${comment.id}`)}>Edit</Button>
                     <Button onClick={(e) => handleDeleteComment(e, comment.id)}>Delete</Button>
                     </Stack>
                 </Box>

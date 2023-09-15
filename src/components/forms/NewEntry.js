@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
 import { createEntry } from "../../api/entryManager"
 import { useState } from "react"
-import { Box, TextField, Typography } from "@mui/material"
+import { Box, Container, Grid, TextField, Typography } from "@mui/material"
 import { FormControl } from "@mui/base"
 import { Button } from "@mui/material"
 
@@ -22,9 +22,18 @@ export const CreateEntry = ({ token }) => {
     }
 
     return (
-    <Box>
+    <Container>
+        <Grid container
+            spacing={2}
+            sx={{ margin: .5 }}
+            direction={'column'}
+            justifyContent={"center"}
+        >
         <form className="entryForm" onSubmit={handleSubmitPost}>
+            <Grid item>
             <Typography className="entryForm__title">New Entry</Typography>
+            </Grid>
+            <Grid item>
             <FormControl>
             <TextField
                 className="form-control"
@@ -40,6 +49,8 @@ export const CreateEntry = ({ token }) => {
                 }}
             />
             </FormControl>
+            </Grid>
+            <Grid item>
             <FormControl>
             <TextField
                 className="form-control"
@@ -58,8 +69,12 @@ export const CreateEntry = ({ token }) => {
                 }}
             />
             </FormControl>
+            </Grid>
+            <Grid item>
             <Button variant="contained" className="btn btn-primary" type="submit">Save</Button>
+            </Grid>
         </form>
-    </Box>
+        </Grid>
+    </Container>
     )
 }

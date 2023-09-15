@@ -39,3 +39,13 @@ export const updateComment = async (comment, token) => {
         body: JSON.stringify(comment)
     });
 }
+
+export const getSingleComment = async (commentId, token) => {
+    const response = await fetch(`http://localhost:8000/comments/${commentId}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Token ${token}`
+        }
+    });
+    return await response.json();
+}
