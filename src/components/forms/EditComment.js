@@ -11,9 +11,9 @@ export const EditComment = ({ token }) => {
     const handleUpdateComment = (e) => {
         e.preventDefault()
 
-        updateComment(comment, token)
+        updateComment({id: comment.id, title: comment.title, content: comment.content, entry: comment.entry.id}, token)
             .then(() => {
-                navigate(`/entries/${comment.entry}`)
+                navigate(`/entries/${comment.entry.id}`)
             })
     }
 
