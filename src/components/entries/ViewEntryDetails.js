@@ -38,7 +38,7 @@ export const EntryDetails = ({ token }) => {
         setDeleteEntryModal(false)
     }
 
-    const handleDeleteCategory = (categoryId) => { // TODO add mui confirmation modal
+    const handleDeleteCategory = (categoryId) => {
         removeEntryCategory(entryId, categoryId, token)
             .then(() => {
                 getCategoriesByEntryId(entryId, token)

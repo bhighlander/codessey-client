@@ -41,7 +41,22 @@ export const Login = ({ setToken }) => {
             alignItems={'center'}
             justifyContent={'center'}
             >
-            <Grid item>
+                <Grid item 
+                    style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        margin: 'auto'
+                    }}
+                >
+            <img src='./codessey_logo.png' alt='Codessey'
+                        style={{ 
+                            maxWidth: '50%', 
+                            maxHeight: '50%',
+                            display: 'block'
+                        }} 
+                    />
             <Typography variant='h4' align='center'>Welcome to Codessey</Typography>
             <Typography variant='subtitle1' align='center'>Please sign in</Typography>
             </Grid>
