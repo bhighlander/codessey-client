@@ -12,10 +12,10 @@ code {
     monospace;
 }
 
-/* .MuiGrid-container {
+.MuiGrid-container {
   border: 2px solid blue !important;
 }
 
 .MuiGrid-item {
   border: 2px solid green !important;
-} */
+}

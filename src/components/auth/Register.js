@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../api/authManager"
 import { FormControl } from "@mui/base"
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, Grid, Link, TextField, Typography } from "@mui/material"
+import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, Grid, Link, TextField, Typography } from "@mui/material"
 
 export const Register = ({ setToken }) => {
     const firstName = useRef()
@@ -58,10 +58,26 @@ export const Register = ({ setToken }) => {
                 alignItems={"center"} 
                 justifyContent={"center"}
             >
-                <Grid item>
+                <Grid item 
+                    style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        margin: 'auto'
+                    }}
+                >
+                    <img src='./codessey_logo.png' alt='Codessey'
+                        style={{ 
+                            maxWidth: '50%', 
+                            maxHeight: '50%',
+                            display: 'block'
+                        }} 
+                    />
                     <Typography variant="h4" align="center">Welcome to Codessey</Typography>
                     <Typography variant="subtitle1" align="center">Please register</Typography>
                 </Grid>
+
     
                 <Grid item style={{ width: '50%'}}>
                     <form onSubmit={handleRegister}>

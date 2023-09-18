@@ -20,7 +20,7 @@ export const NavBar = ({ token, setToken }) => {
             showLabels
             className="navbar__links"
             >
-                {/* <Typography>Codessey</Typography> replace with logo */}
+                <img src='./codessey_logo.png' alt='Codessey' />
                 <BottomNavigationAction label="Entries" icon={<Note />} onClick={() => navigate("/entries")}/>
                 <BottomNavigationAction label="Categories" icon={<Category />} onClick={() => navigate("/categories")}/>
                 <BottomNavigationAction label="New Entry" icon={<NoteAdd />} onClick={() => navigate("/entries/create")}/>
