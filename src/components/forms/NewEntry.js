@@ -60,7 +60,7 @@ export const CreateEntry = ({ token }) => {
                 variant="outlined"
                 margin="normal"
                 multiline
-                rows={6}
+                minRows={6}
                 maxRows={6}
                 required
                 onChange={(e) => {
