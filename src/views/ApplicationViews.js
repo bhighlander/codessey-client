@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { EntriesList } from "../components/entries/ViewAllEntries"
@@ -8,9 +8,30 @@ import { CategoryList } from "../components/categories/ViewCategories"
 import { CreateComment } from "../components/forms/NewComment"
 import { EditEntry } from "../components/forms/EditEntry"
 import { EditComment } from "../components/forms/EditComment"
+import { useEffect } from "react"
 
 export const ApplicationViews = ({ token, setToken }) => {
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+        }
+    }, [token, navigate]);
+
+    if (!token) {
+        return (
+            <>
+            <Routes>
+                <Route>
+                    <Route path="/login" element={<Login setToken={setToken} />} />
+                    <Route path="/register" element={<Register setToken={setToken} />} />
+                </Route>
+            </Routes>
+            </>
+        )
+        
+    } else {
     return (
     <>
     <Routes>
@@ -34,4 +55,5 @@ export const ApplicationViews = ({ token, setToken }) => {
     </Routes>
     </>
     )
+    }
 }
