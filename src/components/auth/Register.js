@@ -24,7 +24,7 @@ export const Register = ({ setToken }) => {
             registerUser(newUser).then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     setToken(res.token);
-                    navigate("/entries");
+                    navigate("/");
                 } else if ("error" in res) {
                     setErrorMessage(res.error);
                     setIsDialogOpen(true);

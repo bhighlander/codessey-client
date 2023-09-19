@@ -9,6 +9,7 @@ import { CreateComment } from "../components/forms/NewComment"
 import { EditEntry } from "../components/forms/EditEntry"
 import { EditComment } from "../components/forms/EditComment"
 import { useEffect } from "react"
+import { UserHome } from "../HomePage"
 
 export const ApplicationViews = ({ token, setToken }) => {
     const navigate = useNavigate()
@@ -40,6 +41,7 @@ export const ApplicationViews = ({ token, setToken }) => {
             <Route path="/login" element={<Login setToken={setToken} />} />
             <Route path="/register" element={<Register setToken={setToken} />} />
             </Route>
+        <Route path="/" element={<UserHome token={token} />} />
         <Route path="/entries">
             <Route index element={<EntriesList token={token} />} />
             <Route path="create" element={<CreateEntry token={token} />} />

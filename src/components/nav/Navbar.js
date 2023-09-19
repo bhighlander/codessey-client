@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { BottomNavigation, BottomNavigationAction, IconButton, Typography } from '@mui/material'
-import { Category, Logout, Note, NoteAdd } from '@mui/icons-material';
+import { Category, Home, Logout, Note, NoteAdd } from '@mui/icons-material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useContext } from 'react';
@@ -21,6 +21,7 @@ export const NavBar = ({ token, setToken }) => {
             className="navbar__links"
             >
                 <img src='./codessey_logo.png' alt='Codessey' />
+                <BottomNavigationAction label="Home" icon={<Home />} onClick={() => navigate("/")}/>
                 <BottomNavigationAction label="Entries" icon={<Note />} onClick={() => navigate("/entries")}/>
                 <BottomNavigationAction label="Categories" icon={<Category />} onClick={() => navigate("/categories")}/>
                 <BottomNavigationAction label="New Entry" icon={<NoteAdd />} onClick={() => navigate("/entries/create")}/>
