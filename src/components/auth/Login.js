@@ -103,11 +103,12 @@ export const Login = ({ setToken }) => {
                 </Grid>
                 </form>
                 </Grid>
-                <br />
+                <Grid item>
                 <Link href="/register">Not a member yet?</Link>
             {
                 isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
             }
+            </Grid>
             </Grid>
         </Container>
 

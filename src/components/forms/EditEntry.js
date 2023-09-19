@@ -43,6 +43,7 @@ export const EditEntry = ({ token }) => {
                 id='title'
                 label="Title"
                 variant="outlined"
+                margin="normal"
                 required
                 InputLabelProps={{ shrink: true }}
                 value={entry.title}
@@ -61,8 +62,9 @@ export const EditEntry = ({ token }) => {
                 id='content'
                 label="Content"
                 variant="outlined"
+                margin="normal"
                 multiline
-                rows={6}
+                minRows={6}
                 maxRows={6}
                 required
                 InputLabelProps={{ shrink: true }}
