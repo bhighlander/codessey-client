@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { EntriesList } from "../components/entries/ViewAllEntries"
@@ -12,12 +12,13 @@ import { useEffect } from "react"
 
 export const ApplicationViews = ({ token, setToken }) => {
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
-        if (!token) {
+        if (!token && location.pathname !== '/login' && location.pathname !== '/register') {
             navigate("/login");
         }
-    }, [token, navigate]);
+    }, [token, navigate, location]);
 
     if (!token) {
         return (
