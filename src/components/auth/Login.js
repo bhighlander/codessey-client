@@ -1,24 +1,21 @@
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 import { loginUser } from "../../api/authManager"
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 
 export const Login = ({ setToken }) => {
-    const username = useRef()
-    const password = useRef()
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    })
     const navigate = useNavigate()
     const [isUnsuccessful, setIsUnsuccessful] = useState(false)
 
     const handleLogin = (e) => {
         e.preventDefault()
-
-        const user = {
-            username: username.current.value,
-            password: password.current.value
-        }
 
         loginUser(user)
             .then(res => {
@@ -31,6 +28,14 @@ export const Login = ({ setToken }) => {
                     setIsUnsuccessful(true)
                 }
             })
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setUser(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
     }
 
     return (
@@ -68,11 +73,12 @@ export const Login = ({ setToken }) => {
                     <TextField
                     className="form-control"
                     id='username'
+                    name='username'
                     label="Username"
                     variant="outlined"
                     required
-                    ref={username}
-                    onChange={(e) => {username.current.value = e.target.value}}
+                    value={user.username}
+                    onChange={handleChange}
                     />
                 </FormControl>
                 </Grid>
@@ -81,12 +87,13 @@ export const Login = ({ setToken }) => {
                     <TextField
                     className="form-control"
                     id='password'
+                    name='password'
                     label="Password"
                     variant="outlined"
                     type='password'
                     required
-                    ref={password}
-                    onChange={(e) => {password.current.value = e.target.value}}
+                    value={user.password}
+                    onChange={handleChange}
                     />
                 </FormControl>
                 </Grid>

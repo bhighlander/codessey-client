@@ -1,55 +1,62 @@
-import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../api/authManager"
 import { FormControl } from "@mui/base"
 import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, Grid, Link, TextField, Typography } from "@mui/material"
+import { useState } from "react"
 
 export const Register = ({ setToken }) => {
-    const firstName = useRef()
-    const lastName = useRef()
-    const email = useRef()
-    const username = useRef()
-    const password = useRef()
-    const verifyPassword = useRef()
-    const navigate = useNavigate()
+    const [newUser, setNewUser] = useState({
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        verifyPassword: ""
+    });
     const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const navigate = useNavigate()
 
     const handleRegister = (e) => {
-        e.preventDefault()
-
-        if (password.current.value === verifyPassword.current.value) {
-            const newUser = {
-                username: username.current.value,
-                first_name: firstName.current.value,
-                last_name: lastName.current.value,
-                email: email.current.value,
-                password: password.current.value
-            }
-
+        e.preventDefault();
+    
+        if (newUser.password === newUser.verifyPassword) {
             registerUser(newUser).then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
-                    setToken(res.token)
-                    navigate("/entries")
+                    setToken(res.token);
+                    navigate("/entries");
+                } else if ("error" in res) {
+                    setErrorMessage(res.error);
+                    setIsDialogOpen(true);
                 }
-            })
+            });
+        } else {
+            setErrorMessage("Passwords do not match");
+            setIsDialogOpen(true);
         }
-        else {
-            setIsDialogOpen(true)
-        }
-    }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewUser(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     return (
         <Container>
             <Dialog className="passwordDialog" open={isDialogOpen}>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Passwords do not match.
+                        {errorMessage}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
                 </DialogActions>
             </Dialog>
+
             
             <Grid container 
                 spacing={2} 
@@ -78,7 +85,7 @@ export const Register = ({ setToken }) => {
                     <Typography variant="subtitle1" align="center">Please register</Typography>
                 </Grid>
 
-    
+                
                 <Grid item style={{ width: '50%'}}>
                     <form onSubmit={handleRegister}>
                         <Grid container spacing={2} sx={{ margin: .5 }} direction={'column'}>
@@ -89,11 +96,12 @@ export const Register = ({ setToken }) => {
                     style={{width: '100%'}}
                     className="form-control"
                     id='firstName'
+                    name="first_name"
                     label="First Name"
                     variant="outlined"
                     required
-                    ref={firstName}
-                    onChange={(e) => {firstName.current.value = e.target.value}}
+                    value={newUser.first_name}
+                    onChange={handleChange}
                 />
             </FormControl>
             </Grid>
@@ -103,11 +111,12 @@ export const Register = ({ setToken }) => {
                     style={{width: '100%'}}
                     className="form-control"
                     id='lastName'
+                    name="last_name"
                     label="Last Name"
                     variant="outlined"
                     required
-                    ref={lastName}
-                    onChange={(e) => {lastName.current.value = e.target.value}}
+                    value={newUser.last_name}
+                    onChange={handleChange}
                 />
             </FormControl>
             </Grid>
@@ -117,11 +126,12 @@ export const Register = ({ setToken }) => {
                     style={{width: '100%'}}
                     className="form-control"
                     id='email'
+                    name="email"
                     label="Email"
                     variant="outlined"
                     required
-                    ref={email}
-                    onChange={(e) => {email.current.value = e.target.value}}
+                    value={newUser.email}
+                    onChange={handleChange}
                 />
             </FormControl>
             </Grid>
@@ -131,11 +141,12 @@ export const Register = ({ setToken }) => {
                     style={{width: '100%'}}
                     className="form-control"
                     id='username'
+                    name="username"
                     label="Username"
                     variant="outlined"
                     required
-                    ref={username}
-                    onChange={(e) => {username.current.value = e.target.value}}
+                    value={newUser.username}
+                    onChange={handleChange}
                 />
             </FormControl>
             </Grid>
@@ -146,12 +157,13 @@ export const Register = ({ setToken }) => {
                 <TextField
                     className="form-control"
                     id='password'
+                    name="password"
                     label="Password"
                     variant="outlined"
                     type='password'
                     required
-                    ref={password}
-                    onChange={(e) => {password.current.value = e.target.value}}
+                    value={newUser.password}
+                    onChange={handleChange}
                 />
             </FormControl>
             </Grid>
@@ -160,12 +172,13 @@ export const Register = ({ setToken }) => {
                 <TextField
                     className="form-control"
                     id='verifyPassword'
+                    name="verifyPassword"
                     label="Verify Password"
                     variant="outlined"
                     type='password'
                     required
-                    ref={verifyPassword}
-                    onChange={(e) => {verifyPassword.current.value = e.target.value}}
+                    value={newUser.verifyPassword}
+                    onChange={handleChange}
                 />
             </FormControl>
             </Grid>
