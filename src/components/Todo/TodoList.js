@@ -3,8 +3,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
-import { Button, TextField } from '@mui/material';
-import { addTodo, getTodos, updateTodo } from '../../api/todoManager';
+import { Button, IconButton, TextField } from '@mui/material';
+import { addTodo, deleteTodo, getTodos, updateTodo } from '../../api/todoManager';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 export const TodoList = ({ token }) => {
     const [todos, setTodos] = useState([]);
@@ -17,15 +18,11 @@ export const TodoList = ({ token }) => {
 
 
     const handleCheck = (id) => {
-
         const todoToUpdate = todos.find((todo) => todo.id === id);
-
         const updatedTodo = { 
             ...todoToUpdate, 
             done: !todoToUpdate.done,
-            completed_at: !todoToUpdate.done ? new Date().toISOString() : null
         };
-
         updateTodo(updatedTodo, token)
             .then(() => {
             setTodos(
@@ -44,6 +41,14 @@ export const TodoList = ({ token }) => {
                 setNewTodo({
                     content: '',
                 });
+            })
+    };
+
+    const handleDelete = (e, id) => {
+        e.preventDefault();
+        deleteTodo(id, token)
+            .then(() => {
+                setTodos(todos.filter((todo) => todo.id !== id));
             })
     };
 
@@ -79,6 +84,9 @@ export const TodoList = ({ token }) => {
                 <Typography variant="body1" display="inline">
                     {todo.content}
                 </Typography>
+                <IconButton aria-label="Delete" onClick={(e) => handleDelete(e, todo.id)}>
+                    <HighlightOffOutlinedIcon />
+                </IconButton>
                 </Grid>
             ))}
             <Divider />
@@ -100,6 +108,9 @@ export const TodoList = ({ token }) => {
                 >
                     {todo.content}
                 </Typography>
+                <IconButton aria-label="Delete" onClick={(e) => handleDelete(e, todo.id)}>
+                    <HighlightOffOutlinedIcon />
+                </IconButton>
                 </Grid>
             ))}
         </Grid>
