@@ -14,7 +14,7 @@ export const UserHome = ({ token }) => {
     , [token])
 
     return (
-        <Grid container spacing={8} sx={{ margin: .5 }}>
+        <Grid container spacing={6} sx={{ margin: .5 }}>
             <Grid item style={{ width: '50%' }}>
                 <Box className="entries-list">
                     <Typography variant="h5">Entries I'm Working On</Typography>
