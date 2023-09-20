@@ -70,6 +70,7 @@ export const TodoList = ({ token }) => {
                         setNewTodo(copy)
                     }}
                 />
+                <br />
             <Button variant="contained" color="primary" onClick={handleAddTodo}>
             Add
             </Button>
