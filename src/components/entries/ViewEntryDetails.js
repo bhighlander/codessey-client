@@ -12,10 +12,10 @@ import Grid from '@mui/material/Grid'
 export const EntryDetails = ({ token }) => {
     const { entryId } = useParams()
     const navigate = useNavigate()
-    const [entry, setEntry] = useState({})
+    const [entry, setEntry] = useState({ title: "", content: "", publication_date: "", solved: false });
     const [comments, setComments] = useState([])
     const [categories, setCategories] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState("")
     const [entryCategories, setEntryCategories] = useState([])
     const [deleteEntryModal, setDeleteEntryModal] = useState(false)
     const [solved, setSolved] = useState(false)

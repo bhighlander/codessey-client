@@ -7,7 +7,7 @@ import { Box, FormControl, Grid, MenuItem, Select, Typography } from "@mui/mater
 export const EntriesList = ({ token }) => {
     const [entries, setEntries] = useState([])
     const [categories, setCategories] = useState([])
-    const [selectedCategory, setSelectedCategory] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState("All")
 
     useEffect(() => {
         getAllCategories(token)
