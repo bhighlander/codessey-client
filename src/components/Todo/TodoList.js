@@ -61,7 +61,8 @@ export const TodoList = ({ token }) => {
             <Grid item>
                 <TextField
                     variant="outlined"
-                    label="New Todo"
+                    margin='normal'
+                    label="New item"
                     value={newTodo.content}
                     onChange={(e) => {
                         const copy = { ...newTodo };
