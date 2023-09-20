@@ -1,13 +1,3 @@
-export const getEntries = async (token) => {
-    const response = await fetch("http://localhost:8000/entries", {
-        method: "GET",
-        headers: {
-            "Authorization": `Token ${token}`
-        }
-    });
-    return await response.json();
-}
-
 export const deleteEntry = async (entryId, token) => {
     await fetch(`http://localhost:8000/entries/${entryId}`, {
         method: "DELETE",
@@ -97,4 +87,14 @@ export const toggleEntrySolved = async (entryId, currentStatus, token) => {
         },
         body: JSON.stringify({ solved: !currentStatus })
     });
+}
+
+export const getUnsolvedEntries = async (token) => {
+    const response = await fetch("http://localhost:8000/entries/unsolved_entries", {
+        method: "GET",
+        headers: {
+            "Authorization": `Token ${token}`
+        }
+    });
+    return await response.json();
 }

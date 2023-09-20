@@ -101,7 +101,7 @@ export const EntryDetails = ({ token }) => {
                         <FormControlLabel control={<Checkbox checked={solved} />} label="Solved" onChange={handleToggleSolved} />
                     </FormGroup>
 
-                    <Typography variant="body1" className="entry__content">{entry.content}</Typography>
+                    <Typography variant="body1" className="entry__content" style={{ whiteSpace: "pre-wrap" }}>{entry.content}</Typography>
                     <Typography variant="caption" className="entry__date">{entry.publication_date}</Typography>
                     <br />
                     <Button className="btn btn-primary" onClick={() => {
