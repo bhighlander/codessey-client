@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+## Codessey: The Programmer's Daybook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Application Overview
+Codessey is a comprehensive full-stack platform designed to aid programmers in issue tracking. It offers functionalities for creating, viewing, and updating log entries, which users can comment on as they resolve coding challenges. Additionally, the platform provides the ability to create and modify categories for better organization of log entries. A built-in to-do list feature assists in managing short-term tasks, and a dark mode option ensures an eye-friendly interface for late-night coding stints.
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+ ![React](https://img.shields.io/badge/react%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB) [![Django](https://img.shields.io/badge/Django%20-%23092E20.svg?&style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python%20-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/) ![JavaScript](https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![HTML5](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white)
 
-### `npm start`
+ 
+## Getting Started
+- Clone the repo and run `npm install` to install all dependencies
+- Run `npm start` to start the development server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Relevant Links
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Server side code](https://github.com/bhighlander/codessey-server)
+- [ERD](https://dbdiagram.io/d/Codessey-64f76c3502bd1c4a5e04c718)
+- [Wireframe](https://www.figma.com/file/uD5Ql9MYiwsj6XPuNKgp9z/ShutterBug-Capstone?type=design&node-id=0%3A1&mode=design&t=tGzGgnQLe3fFSQTR-1)
 
-### `npm test`
+## Screenshots
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Home Page](./screenshots/home.png)
+![Entries Page](./screenshots/all_entries.png)
+![Entry Detail Page](./screenshots/entry_details.png)
+![Categories Page](./screenshots/categories.png)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributors
+- [Brandon Highland](https://github.com/users/bhighlander)
