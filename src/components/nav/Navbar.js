@@ -19,7 +19,7 @@ export const NavBar = ({ token, setToken }) => {
         <header className="navbar">
             <AppBar position="static">
                 <Toolbar disableGutters>
-                    <Box sx={{ flexGrow: 1 }}>
+                    <Box sx={{ flexGrow: 1, maxWidth: '100%', overflowX: 'hidden' }}>
                         <Button color="inherit" onClick={() => navigate("/")} startIcon={<Avatar src='./codessey_logo.png' />}>Home</Button>
                         <Button color="inherit" onClick={() => navigate("/entries")} startIcon={<Note />}>Entries</Button>
                         <Button color="inherit" onClick={() => navigate("/categories")} startIcon={<Category />}>Categories</Button>

@@ -46,9 +46,9 @@ export const CategoryList = ({ token }) => {
     }
 
     return (
-        <Box sx={{ margin: 2 }}>
+        <Box sx={{ margin: 2, maxWidth: '100%', overflowX: 'hidden' }}>
             <Typography variant="h5">Categories</Typography>
-            <Grid container spacing={3} sx={{ margin: .5 }}>
+            <Grid container spacing={6} sx={{ margin: 0, maxWidth: '100%', overflowX: 'hidden' }}>
                 {categories?.length > 0 ? (
                     categories.map((category) => (
                         <Grid item key={category.id} xs={2}>

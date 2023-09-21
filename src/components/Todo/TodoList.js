@@ -57,7 +57,7 @@ export const TodoList = ({ token }) => {
             <Typography variant="h5" gutterBottom>
             Todo List
             </Typography>
-            <Grid container direction="column" spacing={2}>
+            <Grid container direction="column" spacing={2} sx={{ maxWidth: '100%', overflowX: 'hidden' }}>
             <Grid item>
                 <TextField
                     variant="outlined"

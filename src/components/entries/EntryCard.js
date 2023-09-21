@@ -6,7 +6,7 @@ export const EntryCard = ({ entry }) => {
 
     return (
         <Box>
-        <Card sx={{ display: 'inline-flex', width: 500, margin: 1 }}>
+        <Card sx={{ display: 'inline-flex', width: 500, margin: 1, maxWidth: '100%', overflowX: 'hidden' }}>
             <CardContent sx={{ width: 200 }}>
             <Link href={`/entries/${entry.id}`} underline='hover'>
                 <Typography variant='h6'>{entry.title}</Typography>
