@@ -20,7 +20,7 @@ export const EntriesList = ({ token }) => {
     }, [token, selectedCategory])
 
     return (
-        <Grid container spacing={8} sx={{ margin: .5 }}>
+        <Grid container spacing={6} sx={{ margin: 0, maxWidth: '100%', overflowX: 'hidden' }}>
             <Grid item style={{ width: '50%' }}>
                 <Box className="entries-list">
                     <Typography variant="h5">Entries</Typography>

@@ -89,7 +89,7 @@ export const EntryDetails = ({ token }) => {
 
 
     return (
-        <Grid container spacing={4} className="entry-details-layout" sx={{ margin: 2 }}>
+        <Grid container spacing={6} className="entry-details-layout" sx={{ margin: 0, maxWidth: '100%', overflowX: 'hidden' }}>
             <Grid item xs={12} md={8} style={{ maxWidth: '50%' }}>
             <Box className="entry-column">
                 <Grid item xs={12} md={8} style={{ maxWidth: '50%' }}>
