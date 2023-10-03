@@ -39,7 +39,7 @@ export const Login = ({ setToken }) => {
     }
 
     return (
-        <Container alignItems='center'>
+        <Container align='center'>
             <Grid container spacing={2}
             sx={{ height: 500 }}
             direction={'column'}
