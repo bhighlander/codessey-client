@@ -1,5 +1,5 @@
 export const deleteEntry = async (entryId, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/entries/${entryId}`, {
+    await fetch(`http://localhost:3000/entries/${entryId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -8,7 +8,7 @@ export const deleteEntry = async (entryId, token) => {
 }
 
 export const getUserEntries = async (token, categoryId = null) => {
-    let url = `https://clownfish-app-3qbai.ondigitalocean.app/entries?user=true`;
+    let url = `http://localhost:3000/entries?user=true`;
     if (categoryId) {
         url += `&category=${categoryId}`;
     }
@@ -24,7 +24,7 @@ export const getUserEntries = async (token, categoryId = null) => {
     }  
 
 export const getSingleEntry = async (entryId, token) => {
-    const response = await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/entries/${entryId}`, {
+    const response = await fetch(`http://localhost:3000/entries/${entryId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -34,7 +34,7 @@ export const getSingleEntry = async (entryId, token) => {
 }
 
 export const createEntry = async (entry, token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/entries", {
+    const response = await fetch("http://localhost:3000/entries", {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -46,7 +46,7 @@ export const createEntry = async (entry, token) => {
 }
 
 export const addEntryCategory = async (entry_id, category_id, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/entries/${entry_id}`, {
+    await fetch(`http://localhost:3000/entries/${entry_id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -57,7 +57,7 @@ export const addEntryCategory = async (entry_id, category_id, token) => {
 }
 
 export const removeEntryCategory = async (entry_id, category_id, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/entries/${entry_id}`, {
+    await fetch(`http://localhost:3000/entries/${entry_id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -68,7 +68,7 @@ export const removeEntryCategory = async (entry_id, category_id, token) => {
 }
 
 export const updateEntry = async (entry, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/entries/${entry.id}`, {
+    await fetch(`http://localhost:3000/entries/${entry.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -79,7 +79,7 @@ export const updateEntry = async (entry, token) => {
 }
 
 export const toggleEntrySolved = async (entryId, currentStatus, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/entries/${entryId}`, {
+    await fetch(`http://localhost:3000/entries/${entryId}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -90,7 +90,7 @@ export const toggleEntrySolved = async (entryId, currentStatus, token) => {
 }
 
 export const getUnsolvedEntries = async (token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/entries/unsolved_entries", {
+    const response = await fetch("http://localhost:3000/entries/unsolved_entries", {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`

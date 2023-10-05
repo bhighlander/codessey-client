@@ -1,5 +1,5 @@
 export const getAllCategories = async (token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/categories", {
+    const response = await fetch("http://localhost:3000/categories", {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -9,7 +9,7 @@ export const getAllCategories = async (token) => {
 }
 
 export const addCategory = async (category, token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/categories", {
+    const response = await fetch("http://localhost:3000/categories", {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -21,7 +21,7 @@ export const addCategory = async (category, token) => {
 }
 
 export const deleteCategory = async (categoryId, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/categories/${categoryId}`, {
+    await fetch(`http://localhost:3000/categories/${categoryId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -30,7 +30,7 @@ export const deleteCategory = async (categoryId, token) => {
 }
 
 export const getCategoriesByEntryId = async (entryId, token) => {
-    const response = await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/categories?entry=${entryId}`, {
+    const response = await fetch(`http://localhost:3000/categories?entry=${entryId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -40,7 +40,7 @@ export const getCategoriesByEntryId = async (entryId, token) => {
 }
 
 export const updateCategory = async (category, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/categories/${category.id}`, {
+    await fetch(`http://localhost:3000/categories/${category.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,

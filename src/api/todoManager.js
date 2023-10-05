@@ -1,5 +1,5 @@
 export const getTodos = async (token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/todos", {
+    const response = await fetch("http://localhost:3000/todos", {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -9,7 +9,7 @@ export const getTodos = async (token) => {
 }
 
 export const addTodo = async (todo, token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/todos", {
+    const response = await fetch("http://localhost:3000/todos", {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -21,7 +21,7 @@ export const addTodo = async (todo, token) => {
 }
 
 export const deleteTodo = async (todoId, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/todos/${todoId}`, {
+    await fetch(`http://localhost:3000/todos/${todoId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -30,7 +30,7 @@ export const deleteTodo = async (todoId, token) => {
 }
 
 export const updateTodo = async (todo, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/todos/${todo.id}`, {
+    await fetch(`http://localhost:3000/todos/${todo.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,

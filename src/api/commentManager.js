@@ -1,5 +1,5 @@
 export const getCommentByEntryId = async (entryId, token) => {
-    const response = await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/comments?entry=${entryId}`, {
+    const response = await fetch(`http://localhost:3000/comments?entry=${entryId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -9,7 +9,7 @@ export const getCommentByEntryId = async (entryId, token) => {
 }
 
 export const createComment = async (comment, token) => {
-    const response = await fetch("https://clownfish-app-3qbai.ondigitalocean.app/comments", {
+    const response = await fetch("http://localhost:3000/comments", {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -21,7 +21,7 @@ export const createComment = async (comment, token) => {
 }
 
 export const deleteComment = async (commentId, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/comments/${commentId}`, {
+    await fetch(`http://localhost:3000/comments/${commentId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -30,7 +30,7 @@ export const deleteComment = async (commentId, token) => {
 }
 
 export const updateComment = async (comment, token) => {
-    await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/comments/${comment.id}`, {
+    await fetch(`http://localhost:3000/comments/${comment.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -41,7 +41,7 @@ export const updateComment = async (comment, token) => {
 }
 
 export const getSingleComment = async (commentId, token) => {
-    const response = await fetch(`https://clownfish-app-3qbai.ondigitalocean.app/comments/${commentId}`, {
+    const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
