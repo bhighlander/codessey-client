@@ -1,5 +1,7 @@
+import { apiUrl } from "../utils/apiConfig";
+
 export const registerUser = async (newUser) => {
-    const response = await fetch("http://localhost:3000/register", {
+    const response = await fetch("${apiUrl}/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -10,7 +12,7 @@ export const registerUser = async (newUser) => {
 }
 
 export const loginUser = async (user) => {
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("${apiUrl}/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

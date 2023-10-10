@@ -1,5 +1,7 @@
+import { apiUrl } from "../utils/apiConfig";
+
 export const getCommentByEntryId = async (entryId, token) => {
-    const response = await fetch(`http://localhost:3000/comments?entry=${entryId}`, {
+    const response = await fetch(`${apiUrl}/comments?entry=${entryId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -9,7 +11,7 @@ export const getCommentByEntryId = async (entryId, token) => {
 }
 
 export const createComment = async (comment, token) => {
-    const response = await fetch("http://localhost:3000/comments", {
+    const response = await fetch(`${apiUrl}/comments`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -21,7 +23,7 @@ export const createComment = async (comment, token) => {
 }
 
 export const deleteComment = async (commentId, token) => {
-    await fetch(`http://localhost:3000/comments/${commentId}`, {
+    await fetch(`${apiUrl}/comments/${commentId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -30,7 +32,7 @@ export const deleteComment = async (commentId, token) => {
 }
 
 export const updateComment = async (comment, token) => {
-    await fetch(`http://localhost:3000/comments/${comment.id}`, {
+    await fetch(`${apiUrl}/comments/${comment.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -41,7 +43,7 @@ export const updateComment = async (comment, token) => {
 }
 
 export const getSingleComment = async (commentId, token) => {
-    const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
+    const response = await fetch(`${apiUrl}/comments/${commentId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
