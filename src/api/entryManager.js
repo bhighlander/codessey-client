@@ -1,5 +1,7 @@
+import { apiUrl } from "../utils/apiConfig";
+
 export const deleteEntry = async (entryId, token) => {
-    await fetch(`http://localhost:3000/entries/${entryId}`, {
+    await fetch(`${apiUrl}/entries/${entryId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -8,7 +10,7 @@ export const deleteEntry = async (entryId, token) => {
 }
 
 export const getUserEntries = async (token, categoryId = null) => {
-    let url = `http://localhost:3000/entries?user=true`;
+    let url = `${apiUrl}/entries?user=true`;
     if (categoryId) {
         url += `&category=${categoryId}`;
     }
@@ -24,7 +26,7 @@ export const getUserEntries = async (token, categoryId = null) => {
     }  
 
 export const getSingleEntry = async (entryId, token) => {
-    const response = await fetch(`http://localhost:3000/entries/${entryId}`, {
+    const response = await fetch(`${apiUrl}/entries/${entryId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -34,7 +36,7 @@ export const getSingleEntry = async (entryId, token) => {
 }
 
 export const createEntry = async (entry, token) => {
-    const response = await fetch("http://localhost:3000/entries", {
+    const response = await fetch(`${apiUrl}/entries`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -46,7 +48,7 @@ export const createEntry = async (entry, token) => {
 }
 
 export const addEntryCategory = async (entry_id, category_id, token) => {
-    await fetch(`http://localhost:3000/entries/${entry_id}`, {
+    await fetch(`${apiUrl}/entries/${entry_id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -57,7 +59,7 @@ export const addEntryCategory = async (entry_id, category_id, token) => {
 }
 
 export const removeEntryCategory = async (entry_id, category_id, token) => {
-    await fetch(`http://localhost:3000/entries/${entry_id}`, {
+    await fetch(`${apiUrl}/entries/${entry_id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -68,7 +70,7 @@ export const removeEntryCategory = async (entry_id, category_id, token) => {
 }
 
 export const updateEntry = async (entry, token) => {
-    await fetch(`http://localhost:3000/entries/${entry.id}`, {
+    await fetch(`${apiUrl}/entries/${entry.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -79,7 +81,7 @@ export const updateEntry = async (entry, token) => {
 }
 
 export const toggleEntrySolved = async (entryId, currentStatus, token) => {
-    await fetch(`http://localhost:3000/entries/${entryId}`, {
+    await fetch(`${apiUrl}/entries/${entryId}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
@@ -90,7 +92,7 @@ export const toggleEntrySolved = async (entryId, currentStatus, token) => {
 }
 
 export const getUnsolvedEntries = async (token) => {
-    const response = await fetch("http://localhost:3000/entries/unsolved_entries", {
+    const response = await fetch(`${apiUrl}/entries/unsolved_entries`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`

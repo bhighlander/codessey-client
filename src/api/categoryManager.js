@@ -1,5 +1,7 @@
+import { apiUrl } from "../utils/apiConfig";
+
 export const getAllCategories = async (token) => {
-    const response = await fetch("http://localhost:3000/categories", {
+    const response = await fetch(`${apiUrl}/categories`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -9,7 +11,7 @@ export const getAllCategories = async (token) => {
 }
 
 export const addCategory = async (category, token) => {
-    const response = await fetch("http://localhost:3000/categories", {
+    const response = await fetch(`${apiUrl}/categories`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${token}`,
@@ -21,7 +23,7 @@ export const addCategory = async (category, token) => {
 }
 
 export const deleteCategory = async (categoryId, token) => {
-    await fetch(`http://localhost:3000/categories/${categoryId}`, {
+    await fetch(`${apiUrl}/categories/${categoryId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Token ${token}`
@@ -30,7 +32,7 @@ export const deleteCategory = async (categoryId, token) => {
 }
 
 export const getCategoriesByEntryId = async (entryId, token) => {
-    const response = await fetch(`http://localhost:3000/categories?entry=${entryId}`, {
+    const response = await fetch(`${apiUrl}/categories?entry=${entryId}`, {
         method: "GET",
         headers: {
             "Authorization": `Token ${token}`
@@ -40,7 +42,7 @@ export const getCategoriesByEntryId = async (entryId, token) => {
 }
 
 export const updateCategory = async (category, token) => {
-    await fetch(`http://localhost:3000/categories/${category.id}`, {
+    await fetch(`${apiUrl}/categories/${category.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${token}`,
